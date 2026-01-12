@@ -219,6 +219,14 @@
             background: #d97706;
         }
         
+        .btn-danger {
+            background: #ef4444;
+        }
+        
+        .btn-danger:hover {
+            background: #dc2626;
+        }
+        
         /* Camera Container */
         .camera-container {
             position: relative;
@@ -512,6 +520,44 @@
             margin: 18px 0;
         }
         
+        /* Learning Session Controls */
+        .learning-controls {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            margin: 15px 0;
+            flex-wrap: wrap;
+        }
+        
+        .learning-status {
+            background: #f0f9ff;
+            border: 2px solid #0ea5e9;
+            border-radius: 8px;
+            padding: 10px;
+            text-align: center;
+            margin: 10px 0;
+            font-weight: 600;
+        }
+        
+        .session-log {
+            margin-top: 15px;
+            padding: 10px;
+            background: #f8fafc;
+            border-radius: 8px;
+            max-height: 200px;
+            overflow-y: auto;
+        }
+        
+        .log-entry {
+            padding: 5px;
+            border-bottom: 1px solid #e2e8f0;
+            font-size: 14px;
+        }
+        
+        .log-entry:last-child {
+            border-bottom: none;
+        }
+        
         /* Utility Classes */
         .hidden {
             display: none !important;
@@ -601,6 +647,10 @@
             
             .control-buttons button {
                 width: 100%;
+            }
+            
+            .learning-controls {
+                flex-direction: column;
             }
             
             .grade-inputs {
@@ -710,6 +760,20 @@
                 </div>
             </div>
             
+            <!-- 학습 세션 제어 -->
+            <div class="learning-controls">
+                <button onclick="startLearningSession()" id="startLearningBtn" class="btn-success hidden">
+                    ▶️ 학습 시작
+                </button>
+                <button onclick="stopLearningSession()" id="stopLearningBtn" class="btn-danger hidden">
+                    ⏹️ 학습 중지
+                </button>
+            </div>
+            
+            <div id="learningStatus" class="learning-status hidden">
+                📚 현재 학습 중: <span id="sessionSubject">-</span> | 총 시간: <span id="sessionTime">00:00</span>
+            </div>
+            
             <div class="detection-info">
                 <div class="detection-item">
                     <div class="detection-label">인식 정확도</div>
@@ -768,6 +832,12 @@
                 <p>⏱️ 총 학습 시간: <strong id="totalStudyTime">0시간 0분</strong></p>
                 <p>🎯 집중도: <strong id="concentration">0%</strong></p>
                 <p>📈 목표 달성률: <strong id="achievement">0%</strong></p>
+            </div>
+            
+            <!-- 세션 로그 -->
+            <div class="session-log">
+                <h4>📝 학습 세션 로그</h4>
+                <div id="logEntries"></div>
             </div>
         </section>
 
@@ -907,7 +977,11 @@
         let totalStartTime = null;
         let subjectStartTime = null;
         let totalTimerInterval = null;
+        let sessionStartTime = null;
+        let sessionTimerInterval = null;
         let isTracking = false;
+        let isSessionActive = false;
+        let sessionLog = [];
         
         // Subjects
         const subjects = ['국어', '수학', '영어', '물리', '화학', '생물', '한국사', '사회'];
@@ -1101,6 +1175,7 @@
             document.getElementById('captureBtn').classList.add('hidden');
             
             stopTotalTimer();
+            stopLearningSession();
             updateStatus('📷 카메라 종료', 'none');
         }
         
@@ -1145,6 +1220,7 @@
                     document.getElementById('detectedText').textContent = text.substring(0, 20) + (text.length > 20 ? '...' : '');
                     document.getElementById('accuracy').textContent = Math.round(confidence) + '%';
                     updateStatus(`✅ ${detectedSubject} 인식됨!`, 'recognized');
+                    showStartLearningButton();
                 } else {
                     updateStatus('❌ 인식 실패. 수동 선택하세요.', 'error');
                 }
@@ -1155,10 +1231,93 @@
                 if (colorResult.subject) {
                     setCurrentSubject(colorResult.subject);
                     updateStatus(`✅ ${colorResult.subject} 색상 인식!`, 'recognized');
+                    showStartLearningButton();
                 } else {
                     updateStatus('❌ 인식 실패. 수동 선택.', 'error');
                 }
             }
+        }
+        
+        function showStartLearningButton() {
+            if (currentSubject) {
+                document.getElementById('startLearningBtn').classList.remove('hidden');
+            }
+        }
+        
+        // 학습 세션 관리
+        function startLearningSession() {
+            if (!currentSubject) {
+                alert('먼저 과목을 선택하세요.');
+                return;
+            }
+            
+            isSessionActive = true;
+            sessionStartTime = Date.now();
+            
+            document.getElementById('startLearningBtn').classList.add('hidden');
+            document.getElementById('stopLearningBtn').classList.remove('hidden');
+            document.getElementById('learningStatus').classList.remove('hidden');
+            document.getElementById('sessionSubject').textContent = currentSubject;
+            
+            sessionTimerInterval = setInterval(updateSessionTime, 1000);
+            
+            const logEntry = `학습 시작: ${currentSubject} (${new Date().toLocaleTimeString()})`;
+            addToLog(logEntry);
+            
+            updateStatus(`▶️ ${currentSubject} 학습 시작!`, 'recognized');
+        }
+        
+        function stopLearningSession() {
+            if (sessionTimerInterval) {
+                clearInterval(sessionTimerInterval);
+                sessionTimerInterval = null;
+            }
+            
+            if (currentSubject && sessionStartTime) {
+                const elapsed = Date.now() - sessionStartTime;
+                subjectTimers[currentSubject] += elapsed;
+                updateSubjectTime(currentSubject);
+            }
+            
+            isSessionActive = false;
+            document.getElementById('stopLearningBtn').classList.add('hidden');
+            document.getElementById('startLearningBtn').classList.remove('hidden');
+            document.getElementById('learningStatus').classList.add('hidden');
+            
+            const sessionTime = formatTime(Date.now() - sessionStartTime);
+            const logEntry = `학습 중지: ${currentSubject} (${sessionTime}, ${new Date().toLocaleTimeString()})`;
+            addToLog(logEntry);
+            
+            updateStatus('⏹️ 학습 중지. 시간이 누적되었습니다.', 'none');
+        }
+        
+        function updateSessionTime() {
+            if (sessionStartTime) {
+                const elapsed = Date.now() - sessionStartTime;
+                document.getElementById('sessionTime').textContent = formatTime(elapsed);
+            }
+        }
+        
+        function addToLog(entry) {
+            sessionLog.push(entry);
+            const logDiv = document.getElementById('logEntries');
+            const logEntry = document.createElement('div');
+            logEntry.className = 'log-entry';
+            logEntry.textContent = entry;
+            logDiv.appendChild(logEntry);
+            
+            // 로그 10개 초과 시 오래된 로그 삭제
+            if (sessionLog.length > 10) {
+                logDiv.removeChild(logDiv.firstChild);
+                sessionLog.shift();
+            }
+        }
+        
+        function formatTime(ms) {
+            const seconds = Math.floor((ms % 60000) / 1000);
+            const minutes = Math.floor((ms % 3600000) / 60000);
+            const hours = Math.floor(ms / 3600000);
+            return `${String(hours).padStart(2, '0')}:${String(minutes).padStart(2, '0')}:${String(seconds).padStart(2, '0')}`;
         }
         
         function analyzeColor(ctx) {
@@ -1257,11 +1416,14 @@
                 btn.classList.remove('active');
                 if (btn.textContent === subject) btn.classList.add('active');
             });
+            
+            showStartLearningButton();
         }
         
         function selectSubject(subject) {
             setCurrentSubject(subject);
             updateStatus(`📚 ${subject} 선택됨`, 'recognized');
+            showStartLearningButton();
         }
         
         function updateSubjectTime(subject) {
@@ -1535,7 +1697,7 @@
         
         // Init
         window.onload = function() {
-            console.log('StudyLens AI 준비 완료 v1.1');
+            console.log('StudyLens AI 준비 완료 v1.2');
             
             // Chart
             const canvas = document.getElementById('weeklyChart');
