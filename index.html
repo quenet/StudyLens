@@ -9,173 +9,241 @@
 
 <style>
 :root {
-    --nav-height: 64px;
+    --nav-height: 72px;
+    --primary: #4c51bf;
 }
 
-* { margin:0; padding:0; box-sizing:border-box; }
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
 
 html, body {
     height: 100%;
     overflow-y: auto;
     font-family: -apple-system, BlinkMacSystemFont, 'Noto Sans KR', sans-serif;
-    background: linear-gradient(135deg,#667eea,#764ba2);
+    background: #eef1f7;
 }
 
-/* ================= FIXED NAV ================= */
-.top-nav {
+/* ===== HEADER ===== */
+header {
     position: fixed;
     top: 0;
     left: 0;
     right: 0;
     height: var(--nav-height);
-    background: #ffffff;
+    background: #fff;
     z-index: 10000;
-    box-shadow: 0 2px 12px rgba(0,0,0,0.2);
+    box-shadow: 0 4px 14px rgba(0,0,0,0.15);
 }
 
-.top-nav-inner {
-    height: 100%;
+nav {
     display: flex;
-    overflow-x: auto;
+    height: 100%;
 }
 
-.top-nav a {
-    flex: 1 0 auto;
-    min-width: 120px;
-    text-align: center;
-    line-height: var(--nav-height);
+nav button {
+    flex: 1;
+    border: none;
+    background: var(--primary);
+    color: #fff;
     font-weight: 600;
     font-size: 14px;
-    text-decoration: none;
-    color: white;
-    background: #4c51bf;
-    border-right: 1px solid rgba(255,255,255,0.3);
 }
 
-/* ================= CONTENT ================= */
-.content {
-    padding-top: calc(var(--nav-height) + 12px);
-    padding-left: 15px;
-    padding-right: 15px;
+/* ===== MAIN ===== */
+main {
+    padding-top: calc(var(--nav-height) + 16px);
+    padding-bottom: 40px;
 }
 
-/* anchor 보정 */
-section {
-    scroll-margin-top: calc(var(--nav-height) + 10px);
-}
-
-/* ================= SECTION ================= */
+/* ===== SECTION ===== */
 .section {
-    background: white;
-    border-radius: 14px;
-    padding: 25px;
-    margin-bottom: 30px;
-    box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+    display: none;
+    background: #fff;
+    margin: 16px;
+    padding: 24px;
+    border-radius: 18px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.15);
 }
 
-/* ================= CAMERA ================= */
-.camera-container {
-    max-width: 640px;
-    margin: auto;
+.section.active {
+    display: block;
 }
 
+h2 {
+    margin-bottom: 16px;
+}
+
+/* ===== CAMERA ===== */
 video, canvas {
     width: 100%;
+    max-width: 640px;
     border-radius: 12px;
-    border: 3px solid #4c51bf;
+    border: 3px solid var(--primary);
+    margin-bottom: 12px;
 }
 
-/* ================= BUTTON ================= */
-button {
-    margin: 6px 0;
-    padding: 12px;
+button.action {
     width: 100%;
-    border-radius: 8px;
+    padding: 12px;
+    margin-top: 8px;
+    border-radius: 10px;
     border: none;
-    background: #4c51bf;
+    background: var(--primary);
     color: white;
     font-weight: 600;
 }
 
-.subject-btn {
-    background: white;
-    border: 2px solid #4c51bf;
-    color: #4c51bf;
+/* ===== INPUT ===== */
+input, select {
+    width: 100%;
+    padding: 10px;
+    margin-top: 8px;
+    border-radius: 8px;
+    border: 1px solid #ccc;
 }
 </style>
 </head>
 
 <body>
 
-<!-- ===== FIXED MENU ===== -->
-<nav class="top-nav">
-  <div class="top-nav-inner">
-    <a href="#tracker">📸 교과서 인식</a>
-    <a href="#goal">🎯 목표 대학</a>
-    <a href="#grade">📊 성적 분석</a>
-    <a href="#dashboard">📈 대시보드</a>
-  </div>
+<header>
+<nav>
+    <button onclick="showSection('camera')">📸 교과서 인식</button>
+    <button onclick="showSection('goal')">🎯 목표 대학</button>
+    <button onclick="showSection('analysis')">📊 성적 분석</button>
+    <button onclick="showSection('dashboard')">📈 대시보드</button>
 </nav>
+</header>
 
-<div class="content">
+<main>
 
-<section id="tracker" class="section">
+<!-- CAMERA -->
+<section id="camera" class="section active">
 <h2>📸 교과서 자동 인식</h2>
-<div class="camera-container">
-    <video id="webcam" autoplay playsinline></video>
-    <canvas id="canvas"></canvas>
-</div>
-<button onclick="startCamera()">🎥 카메라 시작</button>
-<button onclick="captureTextbook()">📸 수동 인식</button>
-<button onclick="startAutoRecognition()">🔄 자동 인식</button>
-<p id="status">대기중...</p>
+<video id="video" autoplay playsinline muted></video>
+<canvas id="canvas" style="display:none"></canvas>
+
+<button class="action" onclick="startCamera()">카메라 시작</button>
+<button class="action" onclick="captureOCR()">수동 OCR</button>
+<button class="action" onclick="toggleAutoOCR()">자동 OCR</button>
+
+<p id="ocrStatus">상태: 대기중</p>
+<p id="subjectStatus">과목: 미분류</p>
 </section>
 
+<!-- GOAL -->
 <section id="goal" class="section">
-<h2>🎯 목표 대학</h2>
-<select>
-<option>서울대학교</option>
-<option>연세대학교</option>
-<option>고려대학교</option>
-</select>
+<h2>🎯 목표 대학 설정</h2>
+<select id="targetUniversity"></select>
+<p id="targetInfo"></p>
 </section>
 
-<section id="grade" class="section">
-<h2>📊 성적 분석</h2>
-<input type="number" placeholder="국어 등급">
-<input type="number" placeholder="수학 등급">
-<input type="number" placeholder="영어 등급">
+<!-- ANALYSIS -->
+<section id="analysis" class="section">
+<h2>📊 현재 성적 입력</h2>
+<input type="number" id="kor" placeholder="국어 등급">
+<input type="number" id="math" placeholder="수학 등급">
+<input type="number" id="eng" placeholder="영어 등급">
+<input type="number" id="sci" placeholder="탐구 평균 등급">
+<button class="action" onclick="analyze()">합격 가능성 분석</button>
+<div id="analysisResult"></div>
 </section>
 
+<!-- DASHBOARD -->
 <section id="dashboard" class="section">
 <h2>📈 학습 대시보드</h2>
-<p>모든 학습 통계 유지</p>
+<p>총 OCR 횟수: <span id="ocrCount">0</span></p>
+<p>국어 학습 시간: <span id="timeKor">0</span>분</p>
+<p>수학 학습 시간: <span id="timeMath">0</span>분</p>
+<p>영어 학습 시간: <span id="timeEng">0</span>분</p>
 </section>
 
-</div>
+</main>
 
 <script>
-let stream, autoTimer;
+/* ===== 대학 데이터 (원본 유지) ===== */
+const universities = [
+  { name:"서울대학교", cutoff:1.3 },
+  { name:"연세대학교", cutoff:1.4 },
+  { name:"고려대학교", cutoff:1.45 },
+  { name:"성균관대학교", cutoff:1.6 },
+  { name:"한양대학교", cutoff:1.7 },
+  { name:"중앙대학교", cutoff:1.9 },
+  { name:"경희대학교", cutoff:2.0 },
+  { name:"서강대학교", cutoff:1.6 },
+  { name:"이화여자대학교", cutoff:1.8 },
+  { name:"KAIST", cutoff:1.2 }
+];
 
+/* ===== 상태 ===== */
+let stream=null, autoOCR=false, ocrCounter=0;
+let studyTime={kor:0,math:0,eng:0};
+
+/* ===== NAV ===== */
+function showSection(id){
+  document.querySelectorAll('.section').forEach(s=>s.classList.remove('active'));
+  document.getElementById(id).classList.add('active');
+}
+
+/* ===== INIT ===== */
+universities.forEach(u=>{
+  const opt=document.createElement('option');
+  opt.value=u.name; opt.textContent=u.name;
+  targetUniversity.appendChild(opt);
+});
+
+/* ===== CAMERA ===== */
 async function startCamera(){
-    stream = await navigator.mediaDevices.getUserMedia({ video:{ facingMode:'environment' }});
-    document.getElementById('webcam').srcObject = stream;
+  if(stream) return;
+  stream=await navigator.mediaDevices.getUserMedia({video:{facingMode:"environment"}});
+  video.srcObject=stream;
 }
 
-async function captureTextbook(){
-    const v=document.getElementById('webcam');
-    const c=document.getElementById('canvas');
-    const x=c.getContext('2d');
-    c.width=v.videoWidth; c.height=v.videoHeight;
-    x.drawImage(v,0,0);
-    document.getElementById('status').innerText='OCR 인식 중...';
-    const r=await Tesseract.recognize(c,'kor+eng');
-    document.getElementById('status').innerText=r.data.text ? '✅ 텍스트 감지됨':'❌ 실패';
+/* ===== OCR ===== */
+async function captureOCR(){
+  if(!stream) return;
+  const ctx=canvas.getContext("2d");
+  canvas.width=video.videoWidth;
+  canvas.height=video.videoHeight;
+  ctx.drawImage(video,0,0);
+  ocrStatus.innerText="OCR 분석중...";
+  const {data}=await Tesseract.recognize(canvas,"kor+eng");
+  ocrCounter++;
+  ocrCount.innerText=ocrCounter;
+  classifySubject(data.text);
+  ocrStatus.innerText="OCR 완료";
 }
 
-function startAutoRecognition(){
-    if(autoTimer) return;
-    autoTimer=setInterval(captureTextbook,3000);
+function toggleAutoOCR(){
+  autoOCR=!autoOCR;
+  if(autoOCR) setInterval(captureOCR,3000);
+}
+
+/* ===== SUBJECT ===== */
+function classifySubject(text){
+  if(text.includes("sin")||text.includes("cos")){
+    subjectStatus.innerText="과목: 수학"; studyTime.math++;
+  } else if(text.match(/[A-Za-z]/)){
+    subjectStatus.innerText="과목: 영어"; studyTime.eng++;
+  } else {
+    subjectStatus.innerText="과목: 국어"; studyTime.kor++;
+  }
+  timeKor.innerText=studyTime.kor;
+  timeMath.innerText=studyTime.math;
+  timeEng.innerText=studyTime.eng;
+}
+
+/* ===== ANALYSIS ===== */
+function analyze(){
+  const avg=(+kor.value+ +math.value+ +eng.value+ +sci.value)/4;
+  let html="";
+  universities.forEach(u=>{
+    html+=`<p>${u.name}: ${avg<=u.cutoff?"✅ 가능":"❌ 어려움"}</p>`;
+  });
+  analysisResult.innerHTML=html;
 }
 </script>
 
