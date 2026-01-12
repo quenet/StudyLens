@@ -80,25 +80,28 @@
             line-height: 1.3;
         }
         
-        /* Navigation Menu - 모바일에서 세로로 쌓여 가독성 향상 */
+        /* Navigation Menu - 데스크톱 row, 모바일 row로 한 줄 배치 */
         .nav-menu {
             display: flex;
-            flex-direction: column;
-            gap: 8px;
+            flex-direction: row;
+            gap: 0;
             border-top: 1px solid #eee;
             padding-top: 10px;
+            justify-content: space-around;
         }
         
         .nav-link {
             background: #4c51bf;
             color: white;
             text-decoration: none;
-            padding: 12px 16px;
+            padding: 12px 8px;
             border-radius: 8px;
-            font-size: 14px;
+            font-size: 13px;
             font-weight: 600;
             transition: all 0.3s;
             text-align: center;
+            flex: 1;
+            max-width: 25%;
             white-space: nowrap;
             overflow: hidden;
             text-overflow: ellipsis;
@@ -518,7 +521,7 @@
             text-align: center;
         }
         
-        /* Responsive Design - 모바일 가독성 강화 */
+        /* Responsive Design - 모바일 가독성 강화, 메뉴 한 줄 배치 */
         @media (max-width: 768px) {
             body {
                 font-size: 15px;
@@ -536,13 +539,16 @@
                 font-size: 12px;
             }
             
+            /* 모바일 메뉴: 한 줄로 배치, 텍스트 축소 */
             .nav-menu {
-                gap: 6px;
+                gap: 2px;
+                padding-top: 8px;
             }
             
             .nav-link {
-                padding: 12px;
-                font-size: 13px;
+                padding: 10px 4px;
+                font-size: 11px;
+                max-width: none;
             }
             
             .section {
@@ -633,6 +639,12 @@
                 min-width: auto;
                 margin: 3px;
             }
+            
+            /* 작은 화면 메뉴 텍스트 더 축소 */
+            .nav-link {
+                font-size: 10px;
+                padding: 8px 2px;
+            }
         }
     </style>
 </head>
@@ -643,11 +655,11 @@
             <h1>📚 StudyLens AI</h1>
             <p class="subtitle">AI 기반 스마트 교과서 인식 & 학습 관리</p>
             
-            <!-- Navigation Menu -->
+            <!-- Navigation Menu - 텍스트 축소 -->
             <nav class="nav-menu">
-                <a href="#section-tracker" class="nav-link">📸 교과서 인식</a>
-                <a href="#section-goal" class="nav-link">🎯 목표 설정</a>
-                <a href="#section-current" class="nav-link">📊 성적 분석</a>
+                <a href="#section-tracker" class="nav-link">📸 교과서</a>
+                <a href="#section-goal" class="nav-link">🎯 목표</a>
+                <a href="#section-current" class="nav-link">📊 성적</a>
                 <a href="#section-dashboard" class="nav-link">📈 대시보드</a>
             </nav>
         </header>
@@ -1150,7 +1162,6 @@
         }
         
         function analyzeColor(ctx) {
-            // ... (same as before)
             const imageData = ctx.getImageData(0, 0, ctx.canvas.width, ctx.canvas.height);
             const data = imageData.data;
             
@@ -1203,7 +1214,6 @@
         }
         
         function detectSubject(text, colorResult) {
-            // ... (same as before)
             let maxScore = 0;
             let detectedSubject = null;
             
