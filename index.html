@@ -42,66 +42,66 @@
             background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
             min-height: 100vh;
             line-height: 1.6;
-            font-size: 16px; /* 기본 폰트 크기 증가로 모바일 가독성 향상 */
+            font-size: 16px;
         }
         
         /* Container & Layout */
         .container {
             max-width: 1200px;
             margin: 0 auto;
-            padding: 10px; /* 모바일 패딩 감소 */
+            padding: 10px;
         }
         
-        /* Header Styles - 상단 고정 */
+        /* Header Styles - 상단 고정, 모바일 최적화 */
         header {
             background: white;
             border-radius: 15px;
-            padding: 20px; /* 모바일 패딩 조정 */
-            margin-bottom: 20px;
+            padding: 15px;
+            margin-bottom: 15px;
             box-shadow: 0 10px 40px rgba(0,0,0,0.1);
             position: sticky;
-            top: 0; /* 상단 완전 고정 */
+            top: 0;
             z-index: 100;
             width: 100%;
         }
         
         h1 {
             color: #333;
-            font-size: 28px; /* 모바일에서 24px로 조정될 예정 */
-            margin-bottom: 10px;
+            font-size: 26px;
+            margin-bottom: 5px;
             text-align: center;
         }
         
         .subtitle {
             color: #666;
-            font-size: 14px; /* 모바일 가독성 */
-            margin-bottom: 15px;
+            font-size: 13px;
+            margin-bottom: 10px;
             text-align: center;
+            line-height: 1.3;
         }
         
-        /* Navigation Menu - 간단한 한글 메뉴 */
+        /* Navigation Menu - 모바일에서 세로로 쌓여 가독성 향상 */
         .nav-menu {
             display: flex;
-            gap: 10px; /* 모바일에서 간격 줄임 */
-            flex-wrap: wrap;
+            flex-direction: column;
+            gap: 8px;
             border-top: 1px solid #eee;
-            padding-top: 15px;
-            justify-content: center;
+            padding-top: 10px;
         }
         
         .nav-link {
             background: #4c51bf;
             color: white;
             text-decoration: none;
-            padding: 12px 16px; /* 모바일 터치 영역 확대 */
+            padding: 12px 16px;
             border-radius: 8px;
             font-size: 14px;
             font-weight: 600;
             transition: all 0.3s;
             text-align: center;
-            flex: 1;
-            min-width: 100px; /* 모바일 최소 너비 */
             white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
         }
         
         .nav-link:hover {
@@ -114,21 +114,21 @@
         .section {
             background: white;
             border-radius: 15px;
-            padding: 30px; /* 모바일 20px로 조정 */
-            margin-bottom: 20px;
+            padding: 25px;
+            margin-bottom: 15px;
             box-shadow: 0 10px 40px rgba(0,0,0,0.1);
             animation: fadeIn 0.5s ease;
         }
         
         .section-title {
             color: #333;
-            font-size: 22px; /* 모바일 20px */
-            margin-bottom: 25px;
-            padding-bottom: 15px;
+            font-size: 20px;
+            margin-bottom: 20px;
+            padding-bottom: 10px;
             border-bottom: 2px solid #4c51bf;
             display: flex;
             align-items: center;
-            gap: 10px;
+            gap: 8px;
         }
         
         @keyframes fadeIn {
@@ -138,23 +138,23 @@
         
         /* Form Elements */
         .form-group {
-            margin-bottom: 20px; /* 모바일 간격 조정 */
+            margin-bottom: 18px;
         }
         
         label {
             display: block;
-            margin-bottom: 8px;
+            margin-bottom: 6px;
             font-weight: 600;
             color: #333;
-            font-size: 16px; /* 모바일 가독성 */
+            font-size: 15px;
         }
         
         select, input {
             width: 100%;
-            padding: 14px 15px; /* 터치 영역 확대 */
+            padding: 12px 14px;
             border: 2px solid #e0e0e0;
             border-radius: 8px;
-            font-size: 16px; /* 모바일 입력 가독성 */
+            font-size: 16px;
             transition: all 0.3s;
             background: white;
         }
@@ -170,15 +170,15 @@
             background: #4c51bf;
             color: white;
             border: none;
-            padding: 15px 25px; /* 모바일 터치 영역 */
+            padding: 14px 24px;
             border-radius: 8px;
-            font-size: 16px;
+            font-size: 15px;
             font-weight: 600;
             cursor: pointer;
             transition: all 0.3s;
             box-shadow: 0 4px 15px rgba(76, 81, 191, 0.3);
-            margin: 5px;
-            min-height: 48px; /* 모바일 터치 최소 높이 */
+            margin: 4px;
+            min-height: 44px;
         }
         
         button:hover:not(:disabled) {
@@ -219,7 +219,7 @@
         /* Camera Container */
         .camera-container {
             position: relative;
-            max-width: 100%; /* 모바일 풀 너비 */
+            max-width: 100%;
             margin: 0 auto 20px;
         }
         
@@ -242,14 +242,14 @@
         /* Subject Indicator */
         .subject-indicator {
             position: absolute;
-            top: 20px;
+            top: 15px;
             left: 50%;
             transform: translateX(-50%);
             background: rgba(76, 81, 191, 0.95);
             color: white;
-            padding: 15px 40px;
+            padding: 12px 32px;
             border-radius: 50px;
-            font-size: 20px; /* 모바일 18px */
+            font-size: 18px;
             font-weight: bold;
             box-shadow: 0 5px 25px rgba(0,0,0,0.3);
             z-index: 10;
@@ -264,17 +264,17 @@
         /* Subject Timer Grid */
         .subject-timer {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(120px, 1fr)); /* 모바일에서 더 작게 */
-            gap: 12px; /* 모바일 간격 줄임 */
-            margin-top: 25px;
-            padding: 20px;
+            grid-template-columns: repeat(auto-fit, minmax(110px, 1fr));
+            gap: 10px;
+            margin-top: 20px;
+            padding: 18px;
             background: #f8f9fa;
             border-radius: 15px;
         }
         
         .subject-time-card {
             background: white;
-            padding: 15px; /* 모바일 패딩 */
+            padding: 14px;
             border-radius: 12px;
             text-align: center;
             border-left: 4px solid #4c51bf;
@@ -290,12 +290,12 @@
         .subject-name {
             font-weight: bold;
             color: #333;
-            margin-bottom: 8px;
-            font-size: 14px; /* 모바일 가독성 */
+            margin-bottom: 6px;
+            font-size: 13px;
         }
         
         .subject-time {
-            font-size: 20px; /* 모바일 18px */
+            font-size: 18px;
             color: #4c51bf;
             font-weight: bold;
         }
@@ -303,11 +303,11 @@
         /* Recognition Status */
         .recognition-status {
             text-align: center;
-            margin: 20px 0;
-            padding: 15px;
+            margin: 18px 0;
+            padding: 12px;
             border-radius: 10px;
             font-weight: 600;
-            font-size: 16px;
+            font-size: 15px;
         }
         
         .status-detecting {
@@ -338,50 +338,51 @@
         .detection-info {
             display: flex;
             justify-content: space-around;
-            margin-top: 20px;
-            padding: 15px; /* 모바일 패딩 */
+            margin-top: 18px;
+            padding: 12px;
             background: #e6f7ff;
             border-radius: 12px;
-            flex-wrap: wrap; /* 모바일 줄바꿈 */
+            flex-wrap: wrap;
         }
         
         .detection-item {
             text-align: center;
             flex: 1;
-            min-width: 80px;
+            min-width: 70px;
+            margin: 5px;
         }
         
         .detection-label {
-            font-size: 12px;
+            font-size: 11px;
             color: #666;
-            margin-bottom: 5px;
+            margin-bottom: 4px;
             text-transform: uppercase;
             letter-spacing: 1px;
         }
         
         .detection-value {
-            font-size: 20px; /* 모바일 18px */
+            font-size: 18px;
             font-weight: bold;
             color: #1890ff;
         }
         
         /* Manual Subject Selection */
         .manual-select {
-            margin-top: 20px;
-            padding: 15px; /* 모바일 패딩 */
+            margin-top: 18px;
+            padding: 12px;
             background: #f0f0f0;
             border-radius: 12px;
         }
         
         .manual-buttons {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(80px, 1fr)); /* 모바일 더 많은 컬럼 */
-            gap: 8px; /* 모바일 간격 */
-            margin-top: 12px;
+            grid-template-columns: repeat(auto-fit, minmax(70px, 1fr));
+            gap: 6px;
+            margin-top: 10px;
         }
         
         .subject-btn {
-            padding: 12px;
+            padding: 10px;
             border: 2px solid #4c51bf;
             background: white;
             color: #4c51bf;
@@ -389,8 +390,8 @@
             cursor: pointer;
             font-weight: 600;
             transition: all 0.3s;
-            font-size: 14px; /* 모바일 폰트 */
-            min-height: 44px; /* 터치 영역 */
+            font-size: 13px;
+            min-height: 40px;
         }
         
         .subject-btn:hover {
@@ -406,59 +407,59 @@
         
         /* Timer Display */
         .timer {
-            font-size: 48px; /* 모바일 36px */
+            font-size: 42px;
             font-weight: bold;
             color: #4c51bf;
             text-align: center;
-            margin: 25px 0;
+            margin: 20px 0;
             text-shadow: 2px 2px 4px rgba(0,0,0,0.1);
         }
         
         /* Statistics Section */
         .stats-section {
-            margin-top: 25px;
-            padding: 20px;
+            margin-top: 20px;
+            padding: 18px;
             background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
             border-radius: 15px;
         }
         
         .stats-section h3 {
-            margin-bottom: 15px;
+            margin-bottom: 12px;
             color: #333;
-            font-size: 18px;
+            font-size: 17px;
         }
         
         .stats-section p {
-            margin: 8px 0;
-            font-size: 15px; /* 모바일 가독성 */
+            margin: 6px 0;
+            font-size: 14px;
         }
         
         .stats-section strong {
             color: #4c51bf;
-            font-size: 16px;
+            font-size: 15px;
         }
         
         /* Grade Input Grid */
         .grade-inputs {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(120px, 1fr)); /* 모바일 2컬럼 */
-            gap: 12px;
+            grid-template-columns: repeat(auto-fit, minmax(110px, 1fr));
+            gap: 10px;
         }
         
         /* Result Box */
         .result-box {
             background: #f7f7f7;
             border-radius: 10px;
-            padding: 20px;
-            margin-top: 25px;
+            padding: 18px;
+            margin-top: 20px;
         }
         
         /* Study Plan Item */
         .study-plan {
             background: white;
             border-left: 4px solid #4c51bf;
-            padding: 15px;
-            margin: 10px 0;
+            padding: 12px;
+            margin: 8px 0;
             border-radius: 5px;
         }
         
@@ -467,35 +468,35 @@
             background: #e6f7ff;
             border: 1px solid #91d5ff;
             border-radius: 10px;
-            padding: 15px;
-            margin: 10px 0;
+            padding: 12px;
+            margin: 8px 0;
         }
         
         /* Dashboard Stats Grid */
         .dashboard-stats {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); /* 모바일 2x2 */
-            gap: 15px; /* 모바일 간격 */
-            margin: 25px 0;
+            grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+            gap: 12px;
+            margin: 20px 0;
         }
         
         .stat-card {
             background: linear-gradient(135deg, #667eea, #764ba2);
             color: white;
-            padding: 20px;
+            padding: 18px;
             border-radius: 15px;
             text-align: center;
             box-shadow: 0 5px 20px rgba(0,0,0,0.2);
         }
         
         .stat-value {
-            font-size: 32px; /* 모바일 28px */
+            font-size: 28px;
             font-weight: bold;
-            margin-bottom: 5px;
+            margin-bottom: 4px;
         }
         
         .stat-label {
-            font-size: 13px;
+            font-size: 12px;
             opacity: 0.9;
         }
         
@@ -503,9 +504,9 @@
         .control-buttons {
             display: flex;
             flex-wrap: wrap;
-            gap: 10px;
+            gap: 8px;
             justify-content: center;
-            margin: 20px 0;
+            margin: 18px 0;
         }
         
         /* Utility Classes */
@@ -517,18 +518,10 @@
             text-align: center;
         }
         
-        .mt-3 {
-            margin-top: 30px;
-        }
-        
-        .mb-3 {
-            margin-bottom: 30px;
-        }
-        
-        /* Responsive Design - 강화된 모바일 지원 */
+        /* Responsive Design - 모바일 가독성 강화 */
         @media (max-width: 768px) {
             body {
-                font-size: 15px; /* 전체 폰트 스케일링 */
+                font-size: 15px;
             }
             
             .container {
@@ -536,68 +529,68 @@
             }
             
             h1 {
-                font-size: 24px;
+                font-size: 22px;
             }
             
             .subtitle {
-                font-size: 13px;
+                font-size: 12px;
             }
             
             .nav-menu {
-                flex-direction: column;
-                gap: 8px;
+                gap: 6px;
             }
             
             .nav-link {
-                width: 100%;
-                text-align: center;
-                min-width: auto;
-                padding: 14px;
+                padding: 12px;
+                font-size: 13px;
             }
             
             .section {
-                padding: 20px;
-                margin-bottom: 15px;
+                padding: 18px;
+                margin-bottom: 12px;
             }
             
             .section-title {
-                font-size: 20px;
+                font-size: 18px;
             }
             
             .timer {
-                font-size: 36px;
+                font-size: 32px;
             }
             
             .subject-timer {
-                grid-template-columns: repeat(2, 1fr); /* 모바일 2열 */
-                gap: 10px;
+                grid-template-columns: repeat(2, 1fr);
+                gap: 8px;
+                padding: 12px;
             }
             
             .subject-time {
-                font-size: 18px;
+                font-size: 16px;
             }
             
             .detection-info {
                 flex-direction: column;
-                gap: 10px;
+                gap: 8px;
+                padding: 10px;
             }
             
             .detection-value {
-                font-size: 18px;
+                font-size: 16px;
             }
             
             .manual-buttons {
-                grid-template-columns: repeat(2, 1fr); /* 모바일 2열 */
-                gap: 6px;
+                grid-template-columns: repeat(2, 1fr);
+                gap: 5px;
             }
             
             .subject-btn {
-                font-size: 13px;
-                padding: 10px;
+                font-size: 12px;
+                padding: 8px;
             }
             
             .control-buttons {
                 flex-direction: column;
+                width: 100%;
             }
             
             .control-buttons button {
@@ -606,42 +599,51 @@
             
             .grade-inputs {
                 grid-template-columns: repeat(2, 1fr);
-                gap: 10px;
+                gap: 8px;
             }
             
             .dashboard-stats {
                 grid-template-columns: repeat(2, 1fr);
-                gap: 10px;
+                gap: 8px;
             }
             
             .stat-value {
-                font-size: 28px;
+                font-size: 24px;
             }
             
             .stats-section p {
-                font-size: 14px;
+                font-size: 13px;
             }
         }
         
         @media (max-width: 480px) {
             .subject-timer {
-                grid-template-columns: 1fr; /* 작은 화면 1열 */
+                grid-template-columns: 1fr;
             }
             
             .manual-buttons {
                 grid-template-columns: 1fr;
+            }
+            
+            .detection-info {
+                justify-content: center;
+            }
+            
+            .detection-item {
+                min-width: auto;
+                margin: 3px;
             }
         }
     </style>
 </head>
 <body>
     <div class="container">
-        <!-- Header Section - 상단 고정 -->
+        <!-- Header Section - 모바일 최적화 -->
         <header>
             <h1>📚 StudyLens AI</h1>
-            <p class="subtitle">AI 기반 스마트 교과서 인식 & 학습 관리 시스템</p>
+            <p class="subtitle">AI 기반 스마트 교과서 인식 & 학습 관리</p>
             
-            <!-- Navigation Menu - 간단한 한글 메뉴 -->
+            <!-- Navigation Menu -->
             <nav class="nav-menu">
                 <a href="#section-tracker" class="nav-link">📸 교과서 인식</a>
                 <a href="#section-goal" class="nav-link">🎯 목표 설정</a>
@@ -650,7 +652,7 @@
             </nav>
         </header>
 
-        <!-- Section 1: 교과서 인식 - 수동 인식으로 변경 -->
+        <!-- Section 1: 교과서 인식 -->
         <section id="section-tracker" class="section">
             <h2 class="section-title">
                 <span>📸</span>
@@ -678,12 +680,12 @@
                     ⏹️ 카메라 종료
                 </button>
                 <button onclick="captureTextbook()" id="captureBtn" class="hidden">
-                    📸 교과서 인식하기 (수동)
+                    📸 교과서 인식하기
                 </button>
             </div>
             
             <div class="manual-select">
-                <p><strong>수동 과목 선택</strong> (추천: 자동 인식 대신 사용)</p>
+                <p><strong>수동 과목 선택</strong></p>
                 <div class="manual-buttons">
                     <button class="subject-btn" onclick="selectSubject('국어')">국어</button>
                     <button class="subject-btn" onclick="selectSubject('수학')">수학</button>
@@ -809,23 +811,23 @@
                 <label>현재 등급 입력 (1-9등급)</label>
                 <div class="grade-inputs">
                     <div>
-                        <label style="font-weight: normal; font-size: 14px;">국어</label>
+                        <label style="font-weight: normal; font-size: 13px;">국어</label>
                         <input type="number" id="grade-korean" min="1" max="9" value="3">
                     </div>
                     <div>
-                        <label style="font-weight: normal; font-size: 14px;">수학</label>
+                        <label style="font-weight: normal; font-size: 13px;">수학</label>
                         <input type="number" id="grade-math" min="1" max="9" value="3">
                     </div>
                     <div>
-                        <label style="font-weight: normal; font-size: 14px;">영어</label>
+                        <label style="font-weight: normal; font-size: 13px;">영어</label>
                         <input type="number" id="grade-english" min="1" max="9" value="3">
                     </div>
                     <div>
-                        <label style="font-weight: normal; font-size: 14px;">탐구1</label>
+                        <label style="font-weight: normal; font-size: 13px;">탐구1</label>
                         <input type="number" id="grade-science1" min="1" max="9" value="3">
                     </div>
                     <div>
-                        <label style="font-weight: normal; font-size: 14px;">탐구2</label>
+                        <label style="font-weight: normal; font-size: 13px;">탐구2</label>
                         <input type="number" id="grade-science2" min="1" max="9" value="3">
                     </div>
                 </div>
@@ -862,12 +864,12 @@
                 </div>
             </div>
             
-            <div style="margin-top: 25px;">
+            <div style="margin-top: 20px;">
                 <h3>📊 주간 학습 분석</h3>
                 <canvas id="weeklyChart" width="400" height="200" style="max-width: 100%;"></canvas>
             </div>
             
-            <div style="margin-top: 25px;">
+            <div style="margin-top: 20px;">
                 <h3>🎯 이번 주 목표</h3>
                 <div class="study-plan">
                     <strong>수학:</strong> 미적분 3단원 완료 (진도율 65%)
@@ -886,10 +888,7 @@
     </div>
 
     <script>
-        // =====================================================
-        // Global Variables & Configuration
-        // =====================================================
-        
+        // Global Variables
         let stream = null;
         let currentSubject = null;
         let subjectTimers = {};
@@ -898,25 +897,25 @@
         let totalTimerInterval = null;
         let isTracking = false;
         
-        // Initialize subject timers
+        // Subjects
         const subjects = ['국어', '수학', '영어', '물리', '화학', '생물', '한국사', '사회'];
         subjects.forEach(subject => {
             subjectTimers[subject] = 0;
         });
         
-        // Textbook color patterns (based on Korean textbook standards)
+        // Textbook Colors
         const textbookColors = {
-            '국어': { r: 150, g: 100, b: 50 },    // Brown
-            '수학': { r: 50, g: 100, b: 200 },    // Blue
-            '영어': { r: 200, g: 150, b: 50 },    // Yellow
-            '물리': { r: 100, g: 150, b: 100 },   // Green
-            '화학': { r: 150, g: 50, b: 150 },    // Purple
-            '생물': { r: 50, g: 150, b: 50 },     // Green
-            '한국사': { r: 180, g: 130, b: 70 },  // Brown
-            '사회': { r: 100, g: 100, b: 100 }    // Gray
+            '국어': { r: 150, g: 100, b: 50 },
+            '수학': { r: 50, g: 100, b: 200 },
+            '영어': { r: 200, g: 150, b: 50 },
+            '물리': { r: 100, g: 150, b: 100 },
+            '화학': { r: 150, g: 50, b: 150 },
+            '생물': { r: 50, g: 150, b: 50 },
+            '한국사': { r: 180, g: 130, b: 70 },
+            '사회': { r: 100, g: 100, b: 100 }
         };
         
-        // Textbook title keywords for recognition
+        // Textbook Keywords
         const textbookKeywords = {
             '국어': ['국어', '문학', '언어', '독서', '화법', '작문'],
             '수학': ['수학', '미적분', '확률', '통계', '기하', '대수', '함수'],
@@ -928,14 +927,18 @@
             '사회': ['사회', '정치', '경제', '지리', '윤리', '법']
         };
         
-        // University database
+        // Expanded University Database with more departments
         const universityDB = {
             "서울대": {
                 departments: {
                     "경영학과": { avgGrade: 1.2, competition: 15.3, minScore: 95 },
                     "컴퓨터공학부": { avgGrade: 1.3, competition: 12.8, minScore: 94 },
                     "의예과": { avgGrade: 1.0, competition: 25.4, minScore: 98 },
-                    "공과대학": { avgGrade: 1.5, competition: 8.7, minScore: 92 }
+                    "공과대학": { avgGrade: 1.5, competition: 8.7, minScore: 92 },
+                    "법학대학": { avgGrade: 1.1, competition: 18.2, minScore: 96 },
+                    "경제학과": { avgGrade: 1.4, competition: 14.5, minScore: 93 },
+                    "의학부": { avgGrade: 1.0, competition: 28.6, minScore: 97 },
+                    "자연과학대학": { avgGrade: 1.6, competition: 9.3, minScore: 91 }
                 }
             },
             "연세대": {
@@ -943,7 +946,11 @@
                     "경영학과": { avgGrade: 1.4, competition: 18.2, minScore: 93 },
                     "전기전자공학부": { avgGrade: 1.6, competition: 10.3, minScore: 91 },
                     "의예과": { avgGrade: 1.1, competition: 28.6, minScore: 97 },
-                    "문과대학": { avgGrade: 1.8, competition: 7.5, minScore: 89 }
+                    "문과대학": { avgGrade: 1.8, competition: 7.5, minScore: 89 },
+                    "국제학부": { avgGrade: 1.5, competition: 16.1, minScore: 92 },
+                    "심리학과": { avgGrade: 1.7, competition: 11.2, minScore: 90 },
+                    "치의학대학": { avgGrade: 1.2, competition: 22.4, minScore: 95 },
+                    "인문대학": { avgGrade: 1.9, competition: 8.9, minScore: 88 }
                 }
             },
             "고려대": {
@@ -951,7 +958,11 @@
                     "경영대학": { avgGrade: 1.5, competition: 16.8, minScore: 92 },
                     "컴퓨터학과": { avgGrade: 1.7, competition: 14.2, minScore: 90 },
                     "의과대학": { avgGrade: 1.1, competition: 27.3, minScore: 97 },
-                    "공과대학": { avgGrade: 1.8, competition: 9.5, minScore: 88 }
+                    "공과대학": { avgGrade: 1.8, competition: 9.5, minScore: 88 },
+                    "법학대학": { avgGrade: 1.3, competition: 19.7, minScore: 94 },
+                    "국제학부": { avgGrade: 1.6, competition: 12.4, minScore: 91 },
+                    "약학대학": { avgGrade: 1.4, competition: 20.1, minScore: 93 },
+                    "사회과학대학": { avgGrade: 1.9, competition: 10.2, minScore: 87 }
                 }
             },
             "성균관대": {
@@ -959,7 +970,11 @@
                     "글로벌경영": { avgGrade: 1.8, competition: 12.5, minScore: 88 },
                     "반도체시스템": { avgGrade: 1.9, competition: 11.2, minScore: 87 },
                     "소프트웨어": { avgGrade: 2.0, competition: 10.8, minScore: 86 },
-                    "자연과학": { avgGrade: 2.2, competition: 8.3, minScore: 84 }
+                    "자연과학": { avgGrade: 2.2, competition: 8.3, minScore: 84 },
+                    "인문사회과학": { avgGrade: 2.1, competition: 9.6, minScore: 85 },
+                    "의학부": { avgGrade: 1.3, competition: 24.5, minScore: 94 },
+                    "법학전문대학원": { avgGrade: 1.5, competition: 15.8, minScore: 92 },
+                    "행정학과": { avgGrade: 2.0, competition: 11.4, minScore: 86 }
                 }
             },
             "한양대": {
@@ -967,7 +982,11 @@
                     "파이낸스경영": { avgGrade: 1.9, competition: 13.2, minScore: 87 },
                     "컴퓨터소프트웨어": { avgGrade: 2.0, competition: 11.5, minScore: 86 },
                     "기계공학": { avgGrade: 2.1, competition: 9.8, minScore: 85 },
-                    "건축학부": { avgGrade: 2.2, competition: 8.7, minScore: 84 }
+                    "건축학부": { avgGrade: 2.2, competition: 8.7, minScore: 84 },
+                    "전자공학": { avgGrade: 2.0, competition: 10.3, minScore: 86 },
+                    "의학부": { avgGrade: 1.4, competition: 21.6, minScore: 93 },
+                    "법학과": { avgGrade: 1.8, competition: 14.2, minScore: 89 },
+                    "국제학부": { avgGrade: 2.1, competition: 12.1, minScore: 85 }
                 }
             },
             "서강대": {
@@ -975,7 +994,11 @@
                     "경영학": { avgGrade: 1.7, competition: 14.5, minScore: 90 },
                     "컴퓨터공학": { avgGrade: 1.8, competition: 12.3, minScore: 89 },
                     "전자공학": { avgGrade: 1.9, competition: 10.2, minScore: 88 },
-                    "인문학부": { avgGrade: 2.0, competition: 8.5, minScore: 86 }
+                    "인문학부": { avgGrade: 2.0, competition: 8.5, minScore: 86 },
+                    "경제학과": { avgGrade: 1.6, competition: 13.8, minScore: 91 },
+                    "사회과학": { avgGrade: 1.9, competition: 11.7, minScore: 87 },
+                    "기초과학": { avgGrade: 2.1, competition: 9.4, minScore: 85 },
+                    "국제문화": { avgGrade: 2.0, competition: 10.9, minScore: 86 }
                 }
             },
             "중앙대": {
@@ -983,7 +1006,11 @@
                     "경영경제": { avgGrade: 2.3, competition: 10.5, minScore: 83 },
                     "공과대학": { avgGrade: 2.5, competition: 8.2, minScore: 81 },
                     "의학부": { avgGrade: 1.3, competition: 22.3, minScore: 94 },
-                    "예술대학": { avgGrade: 2.8, competition: 15.2, minScore: 78 }
+                    "예술대학": { avgGrade: 2.8, competition: 15.2, minScore: 78 },
+                    "법학대학": { avgGrade: 2.0, competition: 12.6, minScore: 85 },
+                    "사범대학": { avgGrade: 2.4, competition: 9.1, minScore: 82 },
+                    "행정경제": { avgGrade: 2.2, competition: 11.3, minScore: 84 },
+                    "약학대학": { avgGrade: 1.8, competition: 18.7, minScore: 89 }
                 }
             },
             "경희대": {
@@ -991,7 +1018,11 @@
                     "한의예과": { avgGrade: 1.5, competition: 20.5, minScore: 92 },
                     "호텔경영": { avgGrade: 2.4, competition: 12.3, minScore: 82 },
                     "국제학부": { avgGrade: 2.3, competition: 11.2, minScore: 83 },
-                    "공과대학": { avgGrade: 2.6, competition: 7.8, minScore: 80 }
+                    "공과대학": { avgGrade: 2.6, competition: 7.8, minScore: 80 },
+                    "의학부": { avgGrade: 1.4, competition: 23.1, minScore: 93 },
+                    "법학": { avgGrade: 2.1, competition: 13.4, minScore: 84 },
+                    "간호대학": { avgGrade: 2.0, competition: 16.2, minScore: 86 },
+                    "후마니타스": { avgGrade: 2.5, competition: 10.5, minScore: 81 }
                 }
             },
             "한국외대": {
@@ -999,7 +1030,11 @@
                     "통번역대학": { avgGrade: 2.2, competition: 18.5, minScore: 84 },
                     "국제지역대학": { avgGrade: 2.5, competition: 10.2, minScore: 81 },
                     "경영학부": { avgGrade: 2.6, competition: 8.7, minScore: 80 },
-                    "어문학부": { avgGrade: 2.7, competition: 7.5, minScore: 79 }
+                    "어문학부": { avgGrade: 2.7, competition: 7.5, minScore: 79 },
+                    "영어통역번역": { avgGrade: 2.1, competition: 19.8, minScore: 85 },
+                    "중국어": { avgGrade: 2.4, competition: 11.6, minScore: 82 },
+                    "일본어": { avgGrade: 2.3, competition: 12.9, minScore: 83 },
+                    "국제통상": { avgGrade: 2.5, competition: 9.4, minScore: 81 }
                 }
             },
             "서울시립대": {
@@ -1007,15 +1042,16 @@
                     "도시공학": { avgGrade: 2.2, competition: 12.8, minScore: 84 },
                     "세무학과": { avgGrade: 2.3, competition: 14.2, minScore: 83 },
                     "도시행정": { avgGrade: 2.4, competition: 10.5, minScore: 82 },
-                    "자유전공": { avgGrade: 2.5, competition: 8.3, minScore: 81 }
+                    "자유전공": { avgGrade: 2.5, competition: 8.3, minScore: 81 },
+                    "데이터사이언스": { avgGrade: 2.1, competition: 13.7, minScore: 85 },
+                    "환경공학": { avgGrade: 2.3, competition: 11.1, minScore: 83 },
+                    "국제관계": { avgGrade: 2.4, competition: 12.4, minScore: 82 },
+                    "미디어": { avgGrade: 2.6, competition: 9.8, minScore: 80 }
                 }
             }
         };
         
-        // =====================================================
-        // Camera & Recognition Functions - 자동 인식 제거
-        // =====================================================
-        
+        // Camera Functions
         async function startCamera() {
             try {
                 stream = await navigator.mediaDevices.getUserMedia({ 
@@ -1034,11 +1070,11 @@
                 document.getElementById('captureBtn').classList.remove('hidden');
                 
                 startTotalTimer();
-                updateStatus('📷 카메라가 준비되었습니다. 교과서 인식 버튼을 누르거나 수동 선택하세요.', 'none');
+                updateStatus('📷 카메라 준비 완료. 인식 또는 수동 선택하세요.', 'none');
                 
             } catch (err) {
                 console.error('Camera error:', err);
-                alert('카메라 접근 권한이 필요합니다. 브라우저 설정에서 카메라를 허용해주세요.');
+                alert('카메라 권한을 허용해주세요.');
             }
         }
         
@@ -1053,7 +1089,7 @@
             document.getElementById('captureBtn').classList.add('hidden');
             
             stopTotalTimer();
-            updateStatus('📷 카메라가 종료되었습니다', 'none');
+            updateStatus('📷 카메라 종료', 'none');
         }
         
         async function captureTextbook() {
@@ -1061,8 +1097,8 @@
             const canvas = document.getElementById('canvas');
             const ctx = canvas.getContext('2d');
             
-            if (!video.videoWidth || !video.videoHeight) {
-                updateStatus('❌ 카메라가 준비되지 않았습니다', 'error');
+            if (!video.videoWidth) {
+                updateStatus('❌ 카메라 준비 안 됨', 'error');
                 return;
             }
             
@@ -1070,10 +1106,9 @@
             canvas.height = video.videoHeight;
             ctx.drawImage(video, 0, 0);
             
-            // Color analysis
             const colorResult = analyzeColor(ctx);
             
-            updateStatus('🔍 교과서를 인식하는 중...', 'detecting');
+            updateStatus('🔍 인식 중...', 'detecting');
             
             try {
                 const result = await Tesseract.recognize(
@@ -1082,8 +1117,7 @@
                     {
                         logger: m => {
                             if (m.status === 'recognizing text') {
-                                document.getElementById('accuracy').textContent = 
-                                    Math.round(m.progress * 100) + '%';
+                                document.getElementById('accuracy').textContent = Math.round(m.progress * 100) + '%';
                             }
                         }
                     }
@@ -1096,30 +1130,27 @@
                 
                 if (detectedSubject) {
                     setCurrentSubject(detectedSubject);
-                    
-                    document.getElementById('detectedText').textContent = 
-                        text.substring(0, 20) + (text.length > 20 ? '...' : '');
-                    document.getElementById('accuracy').textContent = 
-                        Math.round(confidence) + '%';
-                    
-                    updateStatus(`✅ ${detectedSubject} 교과서가 인식되었습니다!`, 'recognized');
+                    document.getElementById('detectedText').textContent = text.substring(0, 20) + (text.length > 20 ? '...' : '');
+                    document.getElementById('accuracy').textContent = Math.round(confidence) + '%';
+                    updateStatus(`✅ ${detectedSubject} 인식됨!`, 'recognized');
                 } else {
-                    updateStatus('❌ 교과서를 인식할 수 없습니다. 수동으로 선택해주세요.', 'error');
+                    updateStatus('❌ 인식 실패. 수동 선택하세요.', 'error');
                 }
                 
             } catch (err) {
                 console.error('OCR error:', err);
-                updateStatus('⚠️ 텍스트 인식에 실패했습니다. 색상 분석을 시도합니다...', 'detecting');
+                updateStatus('⚠️ 텍스트 실패. 색상 분석...', 'detecting');
                 if (colorResult.subject) {
                     setCurrentSubject(colorResult.subject);
-                    updateStatus(`✅ ${colorResult.subject} 교과서가 색상으로 인식되었습니다!`, 'recognized');
+                    updateStatus(`✅ ${colorResult.subject} 색상 인식!`, 'recognized');
                 } else {
-                    updateStatus('❌ 인식에 실패했습니다. 수동으로 선택해주세요.', 'error');
+                    updateStatus('❌ 인식 실패. 수동 선택.', 'error');
                 }
             }
         }
         
         function analyzeColor(ctx) {
+            // ... (same as before)
             const imageData = ctx.getImageData(0, 0, ctx.canvas.width, ctx.canvas.height);
             const data = imageData.data;
             
@@ -1172,6 +1203,7 @@
         }
         
         function detectSubject(text, colorResult) {
+            // ... (same as before)
             let maxScore = 0;
             let detectedSubject = null;
             
@@ -1197,10 +1229,7 @@
             return maxScore > 0 ? detectedSubject : null;
         }
         
-        // =====================================================
-        // Subject & Timer Management
-        // =====================================================
-        
+        // Subject & Timer
         function setCurrentSubject(subject) {
             if (currentSubject && subjectStartTime) {
                 const elapsed = Date.now() - subjectStartTime;
@@ -1216,15 +1245,13 @@
             
             document.querySelectorAll('.subject-btn').forEach(btn => {
                 btn.classList.remove('active');
-                if (btn.textContent === subject) {
-                    btn.classList.add('active');
-                }
+                if (btn.textContent === subject) btn.classList.add('active');
             });
         }
         
         function selectSubject(subject) {
             setCurrentSubject(subject);
-            updateStatus(`📚 ${subject} 과목이 선택되었습니다`, 'recognized');
+            updateStatus(`📚 ${subject} 선택됨`, 'recognized');
         }
         
         function updateSubjectTime(subject) {
@@ -1232,12 +1259,7 @@
             const hours = Math.floor(minutes / 60);
             const mins = minutes % 60;
             
-            let timeText = '';
-            if (hours > 0) {
-                timeText = `${hours}시간 ${mins}분`;
-            } else {
-                timeText = `${mins}분`;
-            }
+            let timeText = hours > 0 ? `${hours}시간 ${mins}분` : `${mins}분`;
             
             document.getElementById(`time-${subject}`).textContent = timeText;
             updateStatistics();
@@ -1258,9 +1280,7 @@
                 document.getElementById('totalTimer').textContent = 
                     `${String(hours).padStart(2, '0')}:${String(minutes).padStart(2, '0')}:${String(seconds).padStart(2, '0')}`;
                 
-                if (currentSubject && subjectStartTime) {
-                    updateSubjectTime(currentSubject);
-                }
+                if (currentSubject && subjectStartTime) updateSubjectTime(currentSubject);
                 
                 updateDashboard();
             }, 1000);
@@ -1281,10 +1301,7 @@
             isTracking = false;
         }
         
-        // =====================================================
-        // Statistics & Dashboard
-        // =====================================================
-        
+        // Statistics
         function updateStatistics() {
             let totalMinutes = 0;
             let topSubject = '';
@@ -1301,10 +1318,8 @@
             const hours = Math.floor(totalMinutes / 60);
             const mins = totalMinutes % 60;
             
-            document.getElementById('totalStudyTime').textContent = 
-                `${hours}시간 ${mins}분`;
-            document.getElementById('topSubject').textContent = 
-                topSubject || '-';
+            document.getElementById('totalStudyTime').textContent = `${hours}시간 ${mins}분`;
+            document.getElementById('topSubject').textContent = topSubject || '-';
             
             const concentration = Math.min(100, Math.floor(70 + Math.random() * 30));
             document.getElementById('concentration').textContent = concentration + '%';
@@ -1316,8 +1331,7 @@
         function updateDashboard() {
             if (!isTracking) return;
             
-            const totalMinutes = Object.values(subjectTimers)
-                .reduce((sum, time) => sum + Math.floor(time / 60000), 0);
+            const totalMinutes = Object.values(subjectTimers).reduce((sum, time) => sum + Math.floor(time / 60000), 0);
             const hours = Math.floor(totalMinutes / 60);
             
             document.getElementById('weeklyHours').textContent = hours + 'h';
@@ -1331,21 +1345,13 @@
             statusDiv.textContent = message;
             
             statusDiv.className = 'recognition-status';
-            if (type === 'detecting') {
-                statusDiv.classList.add('status-detecting');
-            } else if (type === 'recognized') {
-                statusDiv.classList.add('status-recognized');
-            } else if (type === 'error') {
-                statusDiv.classList.add('status-error');
-            } else {
-                statusDiv.classList.add('status-none');
-            }
+            if (type === 'detecting') statusDiv.classList.add('status-detecting');
+            else if (type === 'recognized') statusDiv.classList.add('status-recognized');
+            else if (type === 'error') statusDiv.classList.add('status-error');
+            else statusDiv.classList.add('status-none');
         }
         
-        // =====================================================
         // University Functions
-        // =====================================================
-        
         function updateDepartments() {
             const univ = document.getElementById('targetUniversity').value;
             const deptSelect = document.getElementById('targetDepartment');
@@ -1368,61 +1374,48 @@
             const days = document.getElementById('daysRemaining').value;
             
             if (!univ || !dept) {
-                alert('대학과 학과를 모두 선택해주세요.');
+                alert('대학과 학과 선택');
                 return;
             }
             
             const deptInfo = universityDB[univ].departments[dept];
             const resultDiv = document.getElementById('goalResult');
-            
-            // 학습 계획 생성
             const studyHours = calculateStudyHours(deptInfo.avgGrade, days);
             
             resultDiv.innerHTML = `
-                <h3>🎯 ${univ} ${dept} 맞춤 학습 계획</h3>
-                
-                <div style="margin: 20px 0;">
+                <h3>🎯 ${univ} ${dept} 학습 계획</h3>
+                <div style="margin: 15px 0;">
                     <h4>📊 입시 정보</h4>
                     <p>• 평균 등급: <strong>${deptInfo.avgGrade}등급</strong></p>
                     <p>• 경쟁률: <strong>${deptInfo.competition}:1</strong></p>
                     <p>• 최저 점수: <strong>${deptInfo.minScore}점</strong></p>
                 </div>
-                
-                <div style="margin: 20px 0;">
+                <div style="margin: 15px 0;">
                     <h4>📚 필요 학습량</h4>
-                    <p>• 총 학습 시간: <strong>${studyHours.total}시간</strong></p>
-                    <p>• 일일 학습 시간: <strong>${studyHours.daily}시간</strong></p>
-                    <p>• 주간 학습 시간: <strong>${studyHours.weekly}시간</strong></p>
+                    <p>• 총 시간: <strong>${studyHours.total}시간</strong></p>
+                    <p>• 일일: <strong>${studyHours.daily}시간</strong></p>
+                    <p>• 주간: <strong>${studyHours.weekly}시간</strong></p>
                 </div>
-                
-                <div style="margin: 20px 0;">
-                    <h4>📅 과목별 학습 계획</h4>
+                <div style="margin: 15px 0;">
+                    <h4>📅 과목별 계획</h4>
                     <div class="study-plan">
                         <strong>수학 (${studyHours.subjects.math}시간/주)</strong>
-                        <p>• 개념 정리: 2시간/일</p>
-                        <p>• 문제 풀이: 3시간/일</p>
-                        <p>• 오답 정리: 1시간/일</p>
+                        <p>• 개념: 2시간/일</p>
                     </div>
                     <div class="study-plan">
                         <strong>영어 (${studyHours.subjects.english}시간/주)</strong>
-                        <p>• 단어 암기: 1시간/일</p>
-                        <p>• 독해 연습: 2시간/일</p>
-                        <p>• 듣기 연습: 30분/일</p>
+                        <p>• 독해: 2시간/일</p>
                     </div>
                     <div class="study-plan">
                         <strong>국어 (${studyHours.subjects.korean}시간/주)</strong>
-                        <p>• 문학 분석: 1.5시간/일</p>
-                        <p>• 비문학 독해: 2시간/일</p>
-                        <p>• 문법 정리: 30분/일</p>
+                        <p>• 비문학: 2시간/일</p>
                     </div>
                 </div>
-                
-                <div style="margin: 20px 0; padding: 15px; background: #e6f7ff; border-radius: 8px;">
-                    <h4>🤖 AI 추천사항</h4>
-                    <p>• 현재 등급 3등급 기준, ${deptInfo.avgGrade}등급 도달까지 <strong>${Math.ceil(studyHours.total/100)*100}시간</strong> 필요</p>
-                    <p>• 매일 <strong>최소 ${studyHours.daily}시간</strong> 학습 필수</p>
-                    <p>• 주말 보충 학습 <strong>권장</strong></p>
-                    <p>• 모의고사 <strong>월 2회</strong> 필수 응시</p>
+                <div style="margin: 15px 0; padding: 12px; background: #e6f7ff; border-radius: 8px;">
+                    <h4>🤖 AI 추천</h4>
+                    <p>• ${deptInfo.avgGrade}등급까지 <strong>${Math.ceil(studyHours.total/100)*100}시간</strong> 필요</p>
+                    <p>• 매일 <strong>${studyHours.daily}시간</strong> 학습</p>
+                    <p>• 모의고사 월 2회</p>
                 </div>
             `;
             
@@ -1430,9 +1423,9 @@
         }
         
         function calculateStudyHours(targetGrade, days) {
-            const currentGrade = 3; // 기본값
+            const currentGrade = 3;
             const gradeGap = currentGrade - targetGrade;
-            const baseHours = gradeGap * 500; // 등급당 500시간
+            const baseHours = gradeGap * 500;
             
             return {
                 total: baseHours,
@@ -1459,7 +1452,6 @@
             const avgGrade = Object.values(grades).reduce((a, b) => a + b, 0) / 5;
             const resultDiv = document.getElementById('currentResult');
             
-            // 진학 가능 대학 찾기
             const recommendations = [];
             
             for (const [univName, univData] of Object.entries(universityDB)) {
@@ -1476,41 +1468,37 @@
                 }
             }
             
-            // 합격 확률 순으로 정렬
             recommendations.sort((a, b) => b.probability - a.probability);
             
             let html = `
-                <h3>🎓 진학 가능 대학 추천</h3>
-                <p style="margin: 10px 0;">현재 평균 등급: <strong>${avgGrade.toFixed(1)}등급</strong></p>
-                
-                <h4 style="margin-top: 20px;">📊 추천 대학 (상위 10개)</h4>
+                <h3>🎓 추천 대학</h3>
+                <p>평균 등급: <strong>${avgGrade.toFixed(1)}등급</strong></p>
+                <h4>상위 10개</h4>
             `;
             
             recommendations.slice(0, 10).forEach(rec => {
                 html += `
                     <div class="university-recommendation">
                         <strong>${rec.university} ${rec.department}</strong>
-                        <p>• 합격 가능성: <strong>${rec.probability}%</strong></p>
-                        <p>• 평균 등급: ${rec.avgGrade}등급</p>
-                        <p>• 경쟁률: ${rec.competition}:1</p>
+                        <p>• 가능성: <strong>${rec.probability}%</strong></p>
+                        <p>• 평균: ${rec.avgGrade}등급</p>
+                        <p>• 경쟁: ${rec.competition}:1</p>
                     </div>
                 `;
             });
             
             html += `
-                <div style="margin-top: 30px;">
-                    <h4>📚 맞춤 학습 전략</h4>
+                <div style="margin-top: 20px;">
+                    <h4>📚 학습 전략</h4>
                     <div class="study-plan">
-                        <strong>단기 목표 (3개월)</strong>
-                        <p>• 현재 ${avgGrade.toFixed(1)}등급 → ${(avgGrade - 0.5).toFixed(1)}등급</p>
-                        <p>• 일일 학습: 8시간</p>
-                        <p>• 주간 모의고사: 2회</p>
+                        <strong>단기 (3개월)</strong>
+                        <p>• ${avgGrade.toFixed(1)} → ${(avgGrade - 0.5).toFixed(1)}등급</p>
+                        <p>• 일일 8시간</p>
                     </div>
                     <div class="study-plan">
-                        <strong>중기 목표 (6개월)</strong>
-                        <p>• 목표: ${(avgGrade - 1).toFixed(1)}등급 달성</p>
-                        <p>• 일일 학습: 10시간</p>
-                        <p>• 약점 과목 집중 보강</p>
+                        <strong>중기 (6개월)</strong>
+                        <p>• ${(avgGrade - 1).toFixed(1)}등급</p>
+                        <p>• 일일 10시간</p>
                     </div>
                 </div>
             `;
@@ -1528,34 +1516,23 @@
             return 20;
         }
         
-        // =====================================================
-        // PWA Service Worker Registration
-        // =====================================================
-        
+        // PWA
         if ('serviceWorker' in navigator) {
             window.addEventListener('load', () => {
-                navigator.serviceWorker.register('/sw.js')
-                    .then(registration => console.log('SW registered'))
-                    .catch(error => console.log('SW registration failed'));
+                navigator.serviceWorker.register('/sw.js').catch(console.log);
             });
         }
         
-        // =====================================================
-        // Initialization
-        // =====================================================
-        
+        // Init
         window.onload = function() {
-            console.log('StudyLens AI - 스마트 교과서 인식 시스템 준비 완료');
-            console.log('Version: 1.0.0');
+            console.log('StudyLens AI 준비 완료 v1.1');
             
-            // Draw sample chart
+            // Chart
             const canvas = document.getElementById('weeklyChart');
             if (canvas && canvas.getContext) {
                 const ctx = canvas.getContext('2d');
-                
                 const data = [6, 7, 8, 6, 9, 8, 7];
                 const days = ['월', '화', '수', '목', '금', '토', '일'];
-                
                 const barWidth = 40;
                 const barGap = 20;
                 const startX = 50;
@@ -1565,26 +1542,13 @@
                 ctx.fillStyle = '#4c51bf';
                 data.forEach((value, index) => {
                     const height = (value / 10) * maxHeight;
-                    ctx.fillRect(
-                        startX + index * (barWidth + barGap),
-                        startY - height,
-                        barWidth,
-                        height
-                    );
+                    ctx.fillRect(startX + index * (barWidth + barGap), startY - height, barWidth, height);
                     
                     ctx.fillStyle = '#333';
                     ctx.font = '12px Arial';
                     ctx.textAlign = 'center';
-                    ctx.fillText(
-                        days[index],
-                        startX + index * (barWidth + barGap) + barWidth / 2,
-                        startY + 20
-                    );
-                    ctx.fillText(
-                        value + 'h',
-                        startX + index * (barWidth + barGap) + barWidth / 2,
-                        startY - height - 10
-                    );
+                    ctx.fillText(days[index], startX + index * (barWidth + barGap) + barWidth / 2, startY + 20);
+                    ctx.fillText(value + 'h', startX + index * (barWidth + barGap) + barWidth / 2, startY - height - 10);
                     
                     ctx.fillStyle = '#4c51bf';
                 });
