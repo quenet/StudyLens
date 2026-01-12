@@ -1,116 +1,252 @@
 <!DOCTYPE html>
 <html lang="ko">
 <head>
-    <meta charset="UTF-8">
-    <title>StudyLens AI</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>StudyLens AI</title>
 
-    <!-- OCR -->
-    <script src="https://unpkg.com/tesseract.js@4.0.2/dist/tesseract.min.js"></script>
+<script src="https://unpkg.com/tesseract.js@4.0.2/dist/tesseract.min.js"></script>
 
-    <style>
-        body {
-            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
-            background: #f7f8fa;
-            margin: 0;
-            padding: 20px;
-        }
-        h1 {
-            text-align: center;
-        }
-        video, canvas {
-            width: 100%;
-            max-width: 480px;
-            border-radius: 12px;
-            margin: 10px auto;
-            display: block;
-        }
-        button {
-            padding: 12px 20px;
-            border: none;
-            border-radius: 10px;
-            background: #4c51bf;
-            color: white;
-            font-size: 16px;
-            cursor: pointer;
-            margin: 10px auto;
-            display: block;
-        }
-        #result {
-            background: white;
-            padding: 15px;
-            border-radius: 10px;
-            max-width: 480px;
-            margin: 10px auto;
-            min-height: 80px;
-            white-space: pre-wrap;
-        }
-    </style>
+<style>
+/* ===============================
+   GLOBAL
+================================ */
+* { margin:0; padding:0; box-sizing:border-box; }
+body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Noto Sans KR', sans-serif;
+    background: linear-gradient(135deg,#667eea,#764ba2);
+}
+
+/* ===============================
+   FIXED TOP NAV (MOBILE SAFE)
+================================ */
+.top-nav {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    background: #ffffff;
+    z-index: 9999;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.15);
+}
+
+.top-nav-inner {
+    display: flex;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+}
+
+.top-nav a {
+    flex: 1 0 auto;
+    min-width: 120px;
+    text-align: center;
+    padding: 14px 10px;
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 14px;
+    color: white;
+    background: #4c51bf;
+    border-right: 1px solid rgba(255,255,255,0.2);
+}
+
+.top-nav a:last-child { border-right: none; }
+
+/* ===============================
+   CONTENT OFFSET
+================================ */
+.content {
+    padding-top: 70px; /* 메뉴 높이만큼 밀기 */
+    padding-left: 15px;
+    padding-right: 15px;
+}
+
+/* ===============================
+   SECTION CARD
+================================ */
+.section {
+    background: white;
+    border-radius: 14px;
+    padding: 25px;
+    margin-bottom: 25px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+}
+
+/* ===============================
+   CAMERA
+================================ */
+.camera-container {
+    position: relative;
+    max-width: 640px;
+    margin: 0 auto;
+}
+
+video, canvas {
+    width: 100%;
+    border-radius: 12px;
+    border: 3px solid #4c51bf;
+}
+
+/* ===============================
+   BUTTONS
+================================ */
+button {
+    margin: 5px;
+    padding: 12px 20px;
+    border-radius: 8px;
+    border: none;
+    background: #4c51bf;
+    color: white;
+    font-weight: 600;
+    cursor: pointer;
+}
+
+/* ===============================
+   SUBJECT BUTTONS
+================================ */
+.subject-btn {
+    border: 2px solid #4c51bf;
+    background: white;
+    color: #4c51bf;
+    border-radius: 8px;
+    padding: 10px;
+}
+.subject-btn.active {
+    background: #4c51bf;
+    color: white;
+}
+
+/* ===============================
+   RESPONSIVE
+================================ */
+@media (max-width:768px){
+    button { width:100%; }
+}
+</style>
 </head>
+
 <body>
 
-<h1>📘 StudyLens AI</h1>
+<!-- ===============================
+     FIXED NAV
+================================ -->
+<nav class="top-nav">
+    <div class="top-nav-inner">
+        <a href="#tracker">📸 교과서 인식</a>
+        <a href="#goal">🎯 목표 대학</a>
+        <a href="#grade">📊 성적 분석</a>
+        <a href="#dashboard">📈 대시보드</a>
+    </div>
+</nav>
 
-<video id="video" autoplay playsinline muted></video>
-<canvas id="captureCanvas" style="display:none;"></canvas>
+<div class="content">
 
-<button id="startCamera">카메라 시작</button>
-<button id="scanText">교과서 텍스트 인식</button>
+<!-- ===============================
+     SECTION 1
+================================ -->
+<section id="tracker" class="section">
+<h2>📸 교과서 자동 인식</h2>
 
-<div id="result">OCR 결과가 여기에 표시됩니다.</div>
+<div class="camera-container">
+    <video id="webcam" autoplay playsinline></video>
+    <canvas id="canvas"></canvas>
+</div>
+
+<button onclick="startCamera()">🎥 카메라 시작</button>
+<button onclick="captureTextbook()">📸 수동 인식</button>
+<button onclick="startAutoRecognition()">🔄 자동 인식</button>
+
+<p id="status">대기중...</p>
+
+<div>
+<button class="subject-btn" onclick="selectSubject('국어')">국어</button>
+<button class="subject-btn" onclick="selectSubject('수학')">수학</button>
+<button class="subject-btn" onclick="selectSubject('영어')">영어</button>
+<button class="subject-btn" onclick="selectSubject('물리')">물리</button>
+<button class="subject-btn" onclick="selectSubject('화학')">화학</button>
+</div>
+</section>
+
+<!-- ===============================
+     SECTION 2
+================================ -->
+<section id="goal" class="section">
+<h2>🎯 목표 대학 설정</h2>
+<select>
+<option>서울대학교</option>
+<option>연세대학교</option>
+<option>고려대학교</option>
+</select>
+</section>
+
+<!-- ===============================
+     SECTION 3
+================================ -->
+<section id="grade" class="section">
+<h2>📊 성적 분석</h2>
+<input type="number" placeholder="국어 등급">
+<input type="number" placeholder="수학 등급">
+<input type="number" placeholder="영어 등급">
+</section>
+
+<!-- ===============================
+     SECTION 4
+================================ -->
+<section id="dashboard" class="section">
+<h2>📈 학습 대시보드</h2>
+<p>주간 학습 시간 / 목표 달성률</p>
+</section>
+
+</div>
 
 <script>
-let stream = null;
-let isProcessing = false;
+let stream;
+let autoInterval;
 
-const video = document.getElementById("video");
-const canvas = document.getElementById("captureCanvas");
-const resultBox = document.getElementById("result");
+const keywords = {
+    국어: ['국어','문학','독서'],
+    수학: ['수학','미적분','확률'],
+    영어: ['english','영어'],
+    물리: ['물리','physics'],
+    화학: ['화학','chemistry']
+};
 
-document.getElementById("startCamera").addEventListener("click", async () => {
-    try {
-        stream = await navigator.mediaDevices.getUserMedia({
-            video: { facingMode: "environment" },
-            audio: false
-        });
-        video.srcObject = stream;
-    } catch (err) {
-        alert("카메라 접근 실패: 브라우저 권한을 확인하세요.");
-        console.error(err);
-    }
-});
+async function startCamera(){
+    stream = await navigator.mediaDevices.getUserMedia({ video:{ facingMode:'environment' }});
+    document.getElementById('webcam').srcObject = stream;
+}
 
-document.getElementById("scanText").addEventListener("click", async () => {
-    if (isProcessing) return;
-    if (!stream) {
-        alert("먼저 카메라를 시작하세요.");
-        return;
-    }
+async function captureTextbook(){
+    const video = document.getElementById('webcam');
+    const canvas = document.getElementById('canvas');
+    const ctx = canvas.getContext('2d');
 
-    isProcessing = true;
-    resultBox.innerText = "🔍 OCR 분석 중...";
-
-    const ctx = canvas.getContext("2d");
     canvas.width = video.videoWidth;
     canvas.height = video.videoHeight;
-    ctx.drawImage(video, 0, 0, canvas.width, canvas.height);
+    ctx.drawImage(video,0,0);
 
-    try {
-        const { data } = await Tesseract.recognize(
-            canvas,
-            "kor+eng",
-            {
-                logger: m => console.log(m)
-            }
-        );
-        resultBox.innerText = data.text || "인식된 텍스트 없음";
-    } catch (e) {
-        resultBox.innerText = "OCR 처리 중 오류 발생";
-        console.error(e);
-    } finally {
-        isProcessing = false;
+    document.getElementById('status').innerText = 'OCR 인식 중...';
+
+    const result = await Tesseract.recognize(canvas,'kor+eng');
+    const text = result.data.text.toLowerCase();
+
+    for(const subject in keywords){
+        if(keywords[subject].some(k=>text.includes(k))){
+            document.getElementById('status').innerText =
+                `✅ ${subject} 교과서 인식됨`;
+            return;
+        }
     }
-});
+    document.getElementById('status').innerText = '❌ 인식 실패 (수동 선택 가능)';
+}
+
+function startAutoRecognition(){
+    if(autoInterval) return;
+    autoInterval = setInterval(captureTextbook,3000);
+}
+
+function selectSubject(sub){
+    document.getElementById('status').innerText = `📚 ${sub} 수동 선택`;
+}
 </script>
 
 </body>
