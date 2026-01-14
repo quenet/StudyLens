@@ -1,9 +1,10 @@
+
 <!DOCTYPE html>
 <html lang="ko">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="StudyLens AI - AI 기반 교과서 자동 인식 및 학습 관리 시스템">
+    <meta name="description" content="Study Lens AI - AI 기반 교과서 자동 인식 및 학습 관리 시스템">
     <meta name="keywords" content="StudyLens, AI, 교과서 인식, 학습 관리, 수능, 대학 입시">
     <meta name="author" content="StudyLens Team">
     
@@ -19,6 +20,9 @@
     
     <!-- Tesseract.js OCR Library -->
     <script src='https://unpkg.com/tesseract.js@4.0.2/dist/tesseract.min.js'></script>
+    
+    <!-- Chart.js for Efficiency Analytics -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     
     <!-- Open Graph Meta Tags -->
     <meta property="og:title" content="StudyLens AI - 스마트 교과서 인식">
@@ -696,20 +700,195 @@
                 padding: 8px 2px;
             }
         }
+        
+        /* Efficiency Analysis Styles - 추가 */
+        .efficiency-card {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 15px;
+            border-radius: 15px;
+            margin: 10px 0;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+        }
+        
+        .efficiency-metric {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin: 8px 0;
+            padding: 8px;
+            background: rgba(255,255,255,0.1);
+            border-radius: 10px;
+        }
+        
+        .efficiency-value {
+            font-size: 20px;
+            font-weight: bold;
+        }
+        
+        .efficiency-label {
+            font-size: 13px;
+            opacity: 0.9;
+        }
+        
+        .score-input-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+            gap: 10px;
+            margin: 15px 0;
+        }
+        
+        .score-card {
+            background: #f8f9fa;
+            padding: 12px;
+            border-radius: 10px;
+            border-left: 4px solid #4c51bf;
+        }
+        
+        .score-card h4 {
+            margin-bottom: 10px;
+            color: #333;
+        }
+        
+        .score-card input, .score-card select {
+            margin-top: 8px;
+        }
+        
+        .analysis-result {
+            background: #e6f7ff;
+            border: 1px solid #91d5ff;
+            padding: 15px;
+            border-radius: 10px;
+            margin: 15px 0;
+        }
+        
+        .recommendation {
+            background: #fff4e6;
+            border: 1px solid #ffd591;
+            padding: 12px;
+            border-radius: 10px;
+            margin: 8px 0;
+        }
+        
+        .feature-preview {
+            opacity: 0.7;
+            border: 2px dashed #999;
+            padding: 15px;
+            margin: 15px 0;
+            border-radius: 10px;
+            background: #f9f9f9;
+            text-align: center;
+        }
+        
+        .efficiency-chart-container {
+            background: white;
+            padding: 15px;
+            border-radius: 15px;
+            margin: 15px 0;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+            height: 200px;
+            position: relative;
+        }
+        
+        .efficiency-chart-container canvas {
+            max-height: 180px !important;
+        }
+        
+        .pattern-analysis {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+            gap: 10px;
+            margin: 15px 0;
+        }
+        
+        .pattern-card {
+            background: #f0f4f8;
+            padding: 12px;
+            border-radius: 10px;
+            text-align: center;
+            transition: transform 0.3s;
+        }
+        
+        .pattern-card h4 {
+            font-size: 14px;
+            margin-bottom: 8px;
+        }
+        
+        .pattern-card p {
+            margin: 5px 0;
+        }
+        
+        .pattern-card:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+        
+        .efficiency-score {
+            font-size: 36px;
+            font-weight: bold;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            text-align: center;
+            margin: 15px 0;
+        }
+        
+        .warning-card {
+            background: #fff5f5;
+            border-left: 4px solid #ef4444;
+            padding: 12px;
+            margin: 10px 0;
+            border-radius: 5px;
+            font-size: 14px;
+        }
+        
+        .warning-card h4 {
+            margin-bottom: 5px;
+            color: #dc2626;
+        }
+        
+        .success-card {
+            background: #f0fdf4;
+            border-left: 4px solid #10b981;
+            padding: 12px;
+            margin: 10px 0;
+            border-radius: 5px;
+            font-size: 14px;
+        }
+        
+        .success-card h4 {
+            margin-bottom: 5px;
+            color: #059669;
+        }
+        
+        @media (max-width: 768px) {
+            .efficiency-score {
+                font-size: 28px;
+            }
+            
+            .efficiency-value {
+                font-size: 18px;
+            }
+            
+            .pattern-analysis {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
     </style>
 </head>
 <body>
     <div class="container">
         <!-- Header Section - 모바일 최적화 -->
         <header>
-            <h1>📚 StudyLens AI</h1>
-            <p class="subtitle">AI 기반 스마트 교과서 인식 & 학습 관리</p>
+            <h1>📚 StudyLens AI  (QueNet Demo Ver 0.2)</h1>
+            <p class="subtitle">AI 기반 학습 관리 플랫폼 서비스</p>
             
             <!-- Navigation Menu - 텍스트 축소 -->
             <nav class="nav-menu">
-                <a href="#section-tracker" class="nav-link">📸 교과서</a>
+                <a href="#section-tracker" class="nav-link">📸 공부시작</a>
                 <a href="#section-goal" class="nav-link">🎯 목표</a>
                 <a href="#section-current" class="nav-link">📊 성적</a>
+                <a href="#section-efficiency" class="nav-link">⚡ 효율분석</a>
                 <a href="#section-dashboard" class="nav-link">📈 대시보드</a>
             </nav>
         </header>
@@ -965,6 +1144,171 @@
                 <div class="study-plan">
                     <strong>탐구:</strong> 물리 역학 단원 정리 (진도율 80%)
                 </div>
+            </div>
+        </section>
+        
+        <!-- Section 5: 학습 효율성 분석 (새로 추가) -->
+        <section id="section-efficiency" class="section">
+            <h2 class="section-title">
+                <span>⚡</span>
+                <span>개인별 학습 효율성 분석</span>
+            </h2>
+
+            <!-- 효율성 점수 표시 -->
+            <div class="efficiency-card">
+                <h3 style="text-align: center; margin-bottom: 10px;">나의 학습 효율성 지수</h3>
+                <div class="efficiency-score" id="efficiencyScore">72점</div>
+                <p style="text-align: center; font-size: 14px; opacity: 0.9;">
+                    상위 28% (전체 사용자 대비)
+                </p>
+                
+                <div class="efficiency-metric">
+                    <span class="efficiency-label">시간당 성적 향상도</span>
+                    <span class="efficiency-value">+0.3등급/월</span>
+                </div>
+                <div class="efficiency-metric">
+                    <span class="efficiency-label">집중도 효율</span>
+                    <span class="efficiency-value">78%</span>
+                </div>
+                <div class="efficiency-metric">
+                    <span class="efficiency-label">학습 패턴 일관성</span>
+                    <span class="efficiency-value">65%</span>
+                </div>
+            </div>
+
+            <!-- 성적 입력 섹션 -->
+            <div class="form-group">
+                <h3 style="margin: 20px 0 15px 0;">📝 성적 데이터 입력</h3>
+                
+                <!-- 모의고사 성적 입력 -->
+                <div class="score-card">
+                    <h4>최근 모의고사 성적</h4>
+                    <div class="score-input-grid">
+                        <div>
+                            <label>국어 (등급)</label>
+                            <input type="number" id="mock-korean" min="1" max="9" placeholder="1-9">
+                        </div>
+                        <div>
+                            <label>수학 (등급)</label>
+                            <input type="number" id="mock-math" min="1" max="9" placeholder="1-9">
+                        </div>
+                        <div>
+                            <label>영어 (등급)</label>
+                            <input type="number" id="mock-english" min="1" max="9" placeholder="1-9">
+                        </div>
+                        <div>
+                            <label>시험일자</label>
+                            <input type="date" id="mock-date">
+                        </div>
+                    </div>
+                    <button onclick="saveMockExam()" style="margin-top: 10px;">
+                        💾 모의고사 성적 저장
+                    </button>
+                </div>
+
+                <!-- 내신 성적 입력 -->
+                <div class="score-card" style="margin-top: 20px;">
+                    <h4>내신 성적 (중간/기말고사)</h4>
+                    <div class="score-input-grid">
+                        <div>
+                            <label>국어 (점수)</label>
+                            <input type="number" id="school-korean" min="0" max="100" placeholder="0-100">
+                        </div>
+                        <div>
+                            <label>수학 (점수)</label>
+                            <input type="number" id="school-math" min="0" max="100" placeholder="0-100">
+                        </div>
+                        <div>
+                            <label>영어 (점수)</label>
+                            <input type="number" id="school-english" min="0" max="100" placeholder="0-100">
+                        </div>
+                        <div>
+                            <label>시험 구분</label>
+                            <select id="exam-type">
+                                <option value="midterm">중간고사</option>
+                                <option value="final">기말고사</option>
+                            </select>
+                        </div>
+                    </div>
+                    <button onclick="saveSchoolExam()" style="margin-top: 10px;">
+                        💾 내신 성적 저장
+                    </button>
+                </div>
+            </div>
+
+            <!-- AI 분석 결과 -->
+            <div class="analysis-result">
+                <h3>🤖 AI 학습 효율성 분석 결과</h3>
+                
+                <div class="pattern-analysis">
+                    <div class="pattern-card">
+                        <h4>최적 학습 시간대</h4>
+                        <p style="font-size: 20px; color: #4c51bf; margin: 8px 0;">오후 7-10시</p>
+                        <p style="font-size: 12px;">집중도 92%</p>
+                    </div>
+                    
+                    <div class="pattern-card">
+                        <h4>효율적 과목</h4>
+                        <p style="font-size: 20px; color: #10b981; margin: 8px 0;">수학</p>
+                        <p style="font-size: 12px;">시간 대비 향상 최고</p>
+                    </div>
+                    
+                    <div class="pattern-card">
+                        <h4>개선 필요</h4>
+                        <p style="font-size: 20px; color: #ef4444; margin: 8px 0;">영어</p>
+                        <p style="font-size: 12px;">효율 개선 필요</p>
+                    </div>
+                    
+                    <div class="pattern-card">
+                        <h4>권장 휴식</h4>
+                        <p style="font-size: 20px; color: #f59e0b; margin: 8px 0;">50분</p>
+                        <p style="font-size: 12px;">최적 집중 시간</p>
+                    </div>
+                </div>
+
+                <!-- 상세 분석 -->
+                <div class="recommendation" style="margin-top: 20px;">
+                    <h4>💡 맞춤형 학습 개선 제안</h4>
+                    <ul style="margin-top: 10px; line-height: 1.8;">
+                        <li><strong>수학:</strong> 현재 효율 우수. 심화 문제 비중을 20% 늘려보세요.</li>
+                        <li><strong>영어:</strong> 단어 암기 시간을 줄이고 독해 연습에 집중하세요.</li>
+                        <li><strong>국어:</strong> 비문학 지문 독해 속도가 느림. 타이머 활용 권장.</li>
+                        <li><strong>전체:</strong> 주 3회 이상 모의고사 실전 연습 필요.</li>
+                    </ul>
+                </div>
+
+                <!-- 경고 메시지 -->
+                <div class="warning-card">
+                    <h4>⚠️ 주의 사항</h4>
+                    <p>최근 2주간 수학 학습 시간이 40% 감소했습니다. 목표 달성을 위해 일일 2시간 이상 확보가 필요합니다.</p>
+                </div>
+
+                <!-- 성공 메시지 -->
+                <div class="success-card">
+                    <h4>✅ 잘하고 있어요!</h4>
+                    <p>국어 성적이 지난달 대비 0.5등급 상승했습니다. 현재 학습 패턴을 유지하세요!</p>
+                </div>
+            </div>
+
+            <!-- 효율성 차트 -->
+            <div class="efficiency-chart-container">
+                <h3>📊 학습 효율성 추이</h3>
+                <canvas id="efficiencyChart"></canvas>
+            </div>
+
+            <!-- 고급 기능 미리보기 -->
+            <div class="feature-preview">
+                <h3>🔮 Premium 기능 (출시 예정)</h3>
+                <ul style="list-style: none; padding: 0; margin-top: 15px;">
+                    <li>✨ AI 실시간 학습 코칭</li>
+                    <li>✨ 뇌파 기반 집중도 측정 (EEG 연동)</li>
+                    <li>✨ 또래 그룹 효율성 비교</li>
+                    <li>✨ 대학별 맞춤 전략 수립</li>
+                    <li>✨ 월간 학습 효율성 리포트</li>
+                </ul>
+                <p style="margin-top: 15px; font-size: 14px; color: #666;">
+                    2025년 2분기 정식 출시 예정
+                </p>
             </div>
         </section>
     </div>
@@ -1725,7 +2069,211 @@
                     ctx.fillStyle = '#4c51bf';
                 });
             }
+            
+            // 효율성 차트 초기화
+            setTimeout(() => {
+                updateEfficiencyChart();
+                calculateEfficiency();
+            }, 500);
         };
+        
+        // ========== 학습 효율성 분석 관련 코드 ==========
+        const efficiencyData = {
+            mockExams: [],
+            schoolExams: [],
+            studyHours: {},
+            efficiencyScores: []
+        };
+
+        // 모의고사 성적 저장
+        function saveMockExam() {
+            const korean = document.getElementById('mock-korean').value;
+            const math = document.getElementById('mock-math').value;
+            const english = document.getElementById('mock-english').value;
+            const date = document.getElementById('mock-date').value;
+
+            if (!korean || !math || !english || !date) {
+                alert('모든 항목을 입력해주세요.');
+                return;
+            }
+
+            const examData = {
+                korean: parseInt(korean),
+                math: parseInt(math),
+                english: parseInt(english),
+                date: date,
+                timestamp: Date.now()
+            };
+
+            efficiencyData.mockExams.push(examData);
+            localStorage.setItem('efficiencyData', JSON.stringify(efficiencyData));
+            
+            calculateEfficiency();
+            alert('모의고사 성적이 저장되었습니다.');
+            
+            // 입력 필드 초기화
+            document.getElementById('mock-korean').value = '';
+            document.getElementById('mock-math').value = '';
+            document.getElementById('mock-english').value = '';
+        }
+
+        // 내신 성적 저장
+        function saveSchoolExam() {
+            const korean = document.getElementById('school-korean').value;
+            const math = document.getElementById('school-math').value;
+            const english = document.getElementById('school-english').value;
+            const type = document.getElementById('exam-type').value;
+
+            if (!korean || !math || !english) {
+                alert('모든 과목 점수를 입력해주세요.');
+                return;
+            }
+
+            const examData = {
+                korean: parseInt(korean),
+                math: parseInt(math),
+                english: parseInt(english),
+                type: type,
+                timestamp: Date.now()
+            };
+
+            efficiencyData.schoolExams.push(examData);
+            localStorage.setItem('efficiencyData', JSON.stringify(efficiencyData));
+            
+            calculateEfficiency();
+            alert('내신 성적이 저장되었습니다.');
+            
+            // 입력 필드 초기화
+            document.getElementById('school-korean').value = '';
+            document.getElementById('school-math').value = '';
+            document.getElementById('school-english').value = '';
+        }
+
+        // 학습 효율성 계산
+        function calculateEfficiency() {
+            // 저장된 데이터 불러오기
+            const savedData = localStorage.getItem('efficiencyData');
+            if (savedData) {
+                Object.assign(efficiencyData, JSON.parse(savedData));
+            }
+
+            // 성적 변화율 계산
+            if (efficiencyData.mockExams.length >= 2) {
+                const recent = efficiencyData.mockExams[efficiencyData.mockExams.length - 1];
+                const previous = efficiencyData.mockExams[efficiencyData.mockExams.length - 2];
+                
+                const koreanChange = previous.korean - recent.korean;
+                const mathChange = previous.math - recent.math;
+                const englishChange = previous.english - recent.english;
+                
+                const avgChange = (koreanChange + mathChange + englishChange) / 3;
+                
+                // 효율성 점수 계산
+                let efficiencyScore = 70;
+                
+                if (avgChange > 0) {
+                    efficiencyScore += avgChange * 10;
+                } else {
+                    efficiencyScore += avgChange * 5;
+                }
+                
+                // 학습 시간 대비 성적 향상도 반영
+                const totalTime = Object.values(subjectTimers).reduce((sum, time) => sum + time, 0);
+                const hoursStudied = totalTime / (1000 * 60 * 60);
+                const hoursPerGrade = hoursStudied / Math.max(avgChange, 0.1);
+                
+                if (hoursPerGrade < 50) {
+                    efficiencyScore += 10;
+                } else if (hoursPerGrade > 100) {
+                    efficiencyScore -= 10;
+                }
+                
+                // 점수 범위 제한
+                efficiencyScore = Math.min(100, Math.max(0, efficiencyScore));
+                
+                // UI 업데이트
+                const scoreElement = document.getElementById('efficiencyScore');
+                if (scoreElement) {
+                    scoreElement.textContent = Math.round(efficiencyScore) + '점';
+                }
+                
+                // 차트 업데이트
+                updateEfficiencyChart();
+            }
+        }
+
+        // 효율성 차트 그리기
+        function updateEfficiencyChart() {
+            const canvas = document.getElementById('efficiencyChart');
+            if (!canvas) return;
+            
+            const ctx = canvas.getContext('2d');
+            const width = canvas.offsetWidth;
+            const height = 180;
+            
+            canvas.width = width;
+            canvas.height = height;
+            
+            // 샘플 데이터
+            const labels = ['1월', '2월', '3월', '4월', '5월', '6월'];
+            const efficiencyScores = [65, 68, 72, 70, 75, 78];
+            
+            const padding = 40;
+            const chartWidth = width - padding * 2;
+            const chartHeight = height - padding * 2;
+            const stepX = chartWidth / (labels.length - 1);
+            
+            // 배경 그리드
+            ctx.strokeStyle = '#e0e0e0';
+            ctx.lineWidth = 1;
+            
+            for (let i = 0; i <= 4; i++) {
+                const y = padding + (chartHeight / 4) * i;
+                ctx.beginPath();
+                ctx.moveTo(padding, y);
+                ctx.lineTo(width - padding, y);
+                ctx.stroke();
+            }
+            
+            // 효율성 점수 그래프
+            ctx.strokeStyle = '#4c51bf';
+            ctx.lineWidth = 3;
+            ctx.beginPath();
+            
+            efficiencyScores.forEach((score, index) => {
+                const x = padding + stepX * index;
+                const y = padding + chartHeight - (score / 100 * chartHeight);
+                
+                if (index === 0) {
+                    ctx.moveTo(x, y);
+                } else {
+                    ctx.lineTo(x, y);
+                }
+                
+                // 점 그리기
+                ctx.fillStyle = '#4c51bf';
+                ctx.beginPath();
+                ctx.arc(x, y, 4, 0, Math.PI * 2);
+                ctx.fill();
+            });
+            ctx.stroke();
+            
+            // 레이블
+            ctx.fillStyle = '#666';
+            ctx.font = '12px Arial';
+            ctx.textAlign = 'center';
+            
+            labels.forEach((label, index) => {
+                const x = padding + stepX * index;
+                ctx.fillText(label, x, height - 15);
+            });
+            
+            // 제목
+            ctx.fillStyle = '#333';
+            ctx.font = '14px Arial';
+            ctx.textAlign = 'left';
+            ctx.fillText('효율성 지수 (%)', 10, 20);
+        }
     </script>
 </body>
 </html>
