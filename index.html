@@ -1,10 +1,9 @@
-
 <!DOCTYPE html>
 <html lang="ko">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Study Lens AI - AI 기반 교과서 자동 인식 및 학습 관리 시스템">
+    <meta name="description" content="StudyLens AI - AI 기반 교과서 자동 인식 및 학습 관리 시스템">
     <meta name="keywords" content="StudyLens, AI, 교과서 인식, 학습 관리, 수능, 대학 입시">
     <meta name="author" content="StudyLens Team">
     
@@ -98,9 +97,9 @@
             background: #4c51bf;
             color: white;
             text-decoration: none;
-            padding: 12px 8px;
+            padding: 10px 6px;
             border-radius: 8px;
-            font-size: 13px;
+            font-size: 12px;
             font-weight: 600;
             transition: all 0.3s;
             text-align: center;
@@ -109,6 +108,7 @@
             white-space: nowrap;
             overflow: hidden;
             text-overflow: ellipsis;
+            margin: 2px;
         }
         
         .nav-link:hover {
@@ -873,6 +873,175 @@
             .pattern-analysis {
                 grid-template-columns: repeat(2, 1fr);
             }
+            
+            .service-flow-diagram {
+                flex-direction: column;
+            }
+            
+            .advantage-cards {
+                grid-template-columns: 1fr;
+            }
+        }
+        
+        /* Service Introduction Styles */
+        .service-hero {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 30px;
+            border-radius: 20px;
+            margin-bottom: 30px;
+            text-align: center;
+        }
+        
+        .service-hero h2 {
+            font-size: 32px;
+            margin-bottom: 15px;
+        }
+        
+        .service-hero p {
+            font-size: 18px;
+            opacity: 0.95;
+            line-height: 1.6;
+        }
+        
+        .service-flow-diagram {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin: 30px 0;
+            padding: 25px;
+            background: #f8f9fa;
+            border-radius: 15px;
+            flex-wrap: wrap;
+            gap: 20px;
+        }
+        
+        .flow-step {
+            flex: 1;
+            min-width: 150px;
+            text-align: center;
+            padding: 15px;
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+            transition: transform 0.3s;
+        }
+        
+        .flow-step:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 5px 20px rgba(0,0,0,0.15);
+        }
+        
+        .flow-step-icon {
+            font-size: 36px;
+            margin-bottom: 10px;
+        }
+        
+        .flow-step-title {
+            font-weight: bold;
+            color: #4c51bf;
+            margin-bottom: 5px;
+        }
+        
+        .flow-step-desc {
+            font-size: 14px;
+            color: #666;
+        }
+        
+        .flow-arrow {
+            font-size: 24px;
+            color: #4c51bf;
+            margin: 0 10px;
+        }
+        
+        .advantage-cards {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            margin: 30px 0;
+        }
+        
+        .advantage-card {
+            padding: 20px;
+            background: white;
+            border-radius: 15px;
+            border-left: 5px solid #4c51bf;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.08);
+            transition: all 0.3s;
+        }
+        
+        .advantage-card:hover {
+            transform: translateX(5px);
+            box-shadow: 0 8px 25px rgba(0,0,0,0.12);
+        }
+        
+        .advantage-card h4 {
+            color: #4c51bf;
+            margin-bottom: 10px;
+            font-size: 18px;
+        }
+        
+        .advantage-card p {
+            color: #666;
+            line-height: 1.6;
+        }
+        
+        .service-stats {
+            display: flex;
+            justify-content: space-around;
+            flex-wrap: wrap;
+            margin: 30px 0;
+            padding: 25px;
+            background: linear-gradient(135deg, rgba(102, 126, 234, 0.1), rgba(118, 75, 162, 0.1));
+            border-radius: 15px;
+        }
+        
+        .stat-item {
+            text-align: center;
+            padding: 10px;
+            min-width: 120px;
+        }
+        
+        .stat-number {
+            font-size: 36px;
+            font-weight: bold;
+            color: #4c51bf;
+        }
+        
+        .stat-desc {
+            font-size: 14px;
+            color: #666;
+            margin-top: 5px;
+        }
+        
+        .key-features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
+            margin: 20px 0;
+        }
+        
+        .key-feature {
+            background: #f0f4f8;
+            padding: 15px;
+            border-radius: 10px;
+            text-align: center;
+        }
+        
+        .key-feature-icon {
+            font-size: 28px;
+            margin-bottom: 8px;
+        }
+        
+        .key-feature-title {
+            font-weight: bold;
+            color: #333;
+            margin-bottom: 5px;
+        }
+        
+        .key-feature-desc {
+            font-size: 13px;
+            color: #666;
         }
     </style>
 </head>
@@ -880,18 +1049,239 @@
     <div class="container">
         <!-- Header Section - 모바일 최적화 -->
         <header>
-            <h1>📚 StudyLens AI  (QueNet Demo Ver 0.2)</h1>
-            <p class="subtitle">AI 기반 학습 관리 플랫폼 서비스</p>
+            <h1>📚 StudyLens AI</h1>
+            <p class="subtitle">AI 기반 스마트 교과서 인식 & 학습 관리</p>
             
             <!-- Navigation Menu - 텍스트 축소 -->
             <nav class="nav-menu">
-                <a href="#section-tracker" class="nav-link">📸 공부시작</a>
+                <a href="#section-intro" class="nav-link">🏠 서비스소개</a>
+                <a href="#section-tracker" class="nav-link">📸 교과서</a>
                 <a href="#section-goal" class="nav-link">🎯 목표</a>
                 <a href="#section-current" class="nav-link">📊 성적</a>
                 <a href="#section-efficiency" class="nav-link">⚡ 효율분석</a>
                 <a href="#section-dashboard" class="nav-link">📈 대시보드</a>
             </nav>
         </header>
+
+        <!-- Section 0: 서비스 소개 (새로 추가) -->
+        <section id="section-intro" class="section">
+            <div class="service-hero">
+                <h2>🚀 StudyLens AI - 학습 플래너 서비스</h2>
+                <p>AI 기반 개인 맞춤형 학습 코치 플랫폼</p>
+                <p style="font-size: 16px; margin-top: 10px;">교과서 자동 인식부터 합격 예측까지, 당신의 완벽한 수험 파트너</p>
+            </div>
+
+            <!-- 서비스 플로우 다이어그램 -->
+            <h3 style="margin: 30px 0 20px 0; text-align: center;">📚 서비스 작동 방식</h3>
+            
+            <!-- 시각적 다이어그램 -->
+            <div style="text-align: center; margin: 20px 0; padding: 20px; background: white; border-radius: 15px;">
+                <svg width="100%" height="200" viewBox="0 0 800 200" style="max-width: 800px;">
+                    <!-- 배경 -->
+                    <rect x="0" y="0" width="800" height="200" fill="#f8f9fa" rx="10"/>
+                    
+                    <!-- 스마트폰 스탠드 -->
+                    <g transform="translate(50, 50)">
+                        <rect x="0" y="0" width="60" height="100" fill="#333" rx="5"/>
+                        <rect x="5" y="5" width="50" height="80" fill="#4c51bf" rx="3"/>
+                        <text x="30" y="50" text-anchor="middle" fill="white" font-size="12">📱</text>
+                        <path d="M30 100 L20 140 L40 140 Z" fill="#666"/>
+                    </g>
+                    
+                    <!-- 화살표 1 -->
+                    <path d="M130 100 L180 100" stroke="#4c51bf" stroke-width="3" marker-end="url(#arrow)"/>
+                    
+                    <!-- 교과서 -->
+                    <g transform="translate(200, 60)">
+                        <rect x="0" y="0" width="80" height="80" fill="#f0f0f0" stroke="#4c51bf" stroke-width="2" rx="5"/>
+                        <text x="40" y="30" text-anchor="middle" fill="#333" font-size="14">📖 국어</text>
+                        <text x="40" y="50" text-anchor="middle" fill="#666" font-size="10">OCR 인식</text>
+                        <circle cx="40" cy="65" r="15" fill="#10b981" opacity="0.3"/>
+                        <text x="40" y="70" text-anchor="middle" fill="#10b981" font-size="12">✓</text>
+                    </g>
+                    
+                    <!-- 화살표 2 -->
+                    <path d="M300 100 L350 100" stroke="#4c51bf" stroke-width="3" marker-end="url(#arrow)"/>
+                    
+                    <!-- AI 분석 -->
+                    <g transform="translate(370, 50)">
+                        <circle cx="50" cy="50" r="45" fill="#667eea" opacity="0.2"/>
+                        <circle cx="50" cy="50" r="35" fill="#764ba2" opacity="0.3"/>
+                        <text x="50" y="45" text-anchor="middle" fill="#333" font-size="16" font-weight="bold">AI</text>
+                        <text x="50" y="65" text-anchor="middle" fill="#666" font-size="10">분석중...</text>
+                    </g>
+                    
+                    <!-- 화살표 3 -->
+                    <path d="M480 100 L530 100" stroke="#4c51bf" stroke-width="3" marker-end="url(#arrow)"/>
+                    
+                    <!-- 학습 계획 -->
+                    <g transform="translate(550, 60)">
+                        <rect x="0" y="0" width="90" height="80" fill="white" stroke="#10b981" stroke-width="2" rx="5"/>
+                        <text x="45" y="20" text-anchor="middle" fill="#333" font-size="12" font-weight="bold">PLAN</text>
+                        <line x1="10" y1="30" x2="80" y2="30" stroke="#ddd" stroke-width="1"/>
+                        <text x="15" y="45" fill="#10b981" font-size="10">✓ 수학 2h</text>
+                        <text x="15" y="60" fill="#10b981" font-size="10">✓ 영어 1.5h</text>
+                        <text x="15" y="75" fill="#999" font-size="10">□ 국어 1h</text>
+                    </g>
+                    
+                    <!-- 화살표 4 -->
+                    <path d="M660 100 L710 100" stroke="#4c51bf" stroke-width="3" marker-end="url(#arrow)"/>
+                    
+                    <!-- 목표 달성 -->
+                    <g transform="translate(730, 70)">
+                        <text x="0" y="0" text-anchor="middle" fill="#f59e0b" font-size="40">🎯</text>
+                        <text x="0" y="25" text-anchor="middle" fill="#333" font-size="10">연세대</text>
+                        <text x="0" y="40" text-anchor="middle" fill="#10b981" font-size="8" font-weight="bold">85%</text>
+                    </g>
+                    
+                    <!-- 화살표 정의 -->
+                    <defs>
+                        <marker id="arrow" markerWidth="10" markerHeight="10" refX="5" refY="5" orient="auto">
+                            <path d="M0,0 L10,5 L0,10 L3,5 Z" fill="#4c51bf"/>
+                        </marker>
+                    </defs>
+                </svg>
+            </div>
+            
+            <div class="service-flow-diagram">
+                <div class="flow-step">
+                    <div class="flow-step-icon">📱</div>
+                    <div class="flow-step-title">STEP 1</div>
+                    <div class="flow-step-desc">스마트폰 거치<br>AI 카메라 활성화</div>
+                </div>
+                
+                <span class="flow-arrow">→</span>
+                
+                <div class="flow-step">
+                    <div class="flow-step-icon">📸</div>
+                    <div class="flow-step-title">STEP 2</div>
+                    <div class="flow-step-desc">교과서 자동 인식<br>OCR 기술 적용</div>
+                </div>
+                
+                <span class="flow-arrow">→</span>
+                
+                <div class="flow-step">
+                    <div class="flow-step-icon">⏱️</div>
+                    <div class="flow-step-title">STEP 3</div>
+                    <div class="flow-step-desc">실시간 학습 추적<br>과목별 시간 측정</div>
+                </div>
+                
+                <span class="flow-arrow">→</span>
+                
+                <div class="flow-step">
+                    <div class="flow-step-icon">🤖</div>
+                    <div class="flow-step-title">STEP 4</div>
+                    <div class="flow-step-desc">AI 분석 & 코칭<br>맞춤형 계획 생성</div>
+                </div>
+                
+                <span class="flow-arrow">→</span>
+                
+                <div class="flow-step">
+                    <div class="flow-step-icon">🎯</div>
+                    <div class="flow-step-title">STEP 5</div>
+                    <div class="flow-step-desc">목표 달성<br>합격 예측</div>
+                </div>
+            </div>
+
+            <!-- 핵심 기능 -->
+            <h3 style="margin: 30px 0 20px 0;">✨ 핵심 기능</h3>
+            <div class="key-features-grid">
+                <div class="key-feature">
+                    <div class="key-feature-icon">👁️</div>
+                    <div class="key-feature-title">AI Vision OCR</div>
+                    <div class="key-feature-desc">교과서 자동 인식</div>
+                </div>
+                <div class="key-feature">
+                    <div class="key-feature-icon">📊</div>
+                    <div class="key-feature-title">학습 패턴 분석</div>
+                    <div class="key-feature-desc">개인별 효율성 측정</div>
+                </div>
+                <div class="key-feature">
+                    <div class="key-feature-icon">📝</div>
+                    <div class="key-feature-title">AI 계획표 생성</div>
+                    <div class="key-feature-desc">맞춤형 학습 전략</div>
+                </div>
+                <div class="key-feature">
+                    <div class="key-feature-icon">🎓</div>
+                    <div class="key-feature-title">대학 추천</div>
+                    <div class="key-feature-desc">합격 가능성 예측</div>
+                </div>
+                <div class="key-feature">
+                    <div class="key-feature-icon">⚡</div>
+                    <div class="key-feature-title">효율성 분석</div>
+                    <div class="key-feature-desc">시간 대비 성과 측정</div>
+                </div>
+                <div class="key-feature">
+                    <div class="key-feature-icon">💡</div>
+                    <div class="key-feature-title">실시간 코칭</div>
+                    <div class="key-feature-desc">AI 학습 조언</div>
+                </div>
+            </div>
+
+            <!-- 서비스 장점 -->
+            <h3 style="margin: 30px 0 20px 0;">💎 StudyLens AI만의 차별점</h3>
+            <div class="advantage-cards">
+                <div class="advantage-card">
+                    <h4>🎯 "열심히" vs "효율적으로" 구분</h4>
+                    <p>단순 공부 시간이 아닌 실제 성과를 측정합니다. 10시간 공부해도 성적이 안 오르는 이유를 AI가 정확히 진단하고 개선 방법을 제시합니다.</p>
+                </div>
+                
+                <div class="advantage-card">
+                    <h4>📱 스마트폰 하나로 완벽한 학습 관리</h4>
+                    <p>별도 장비 없이 스마트폰과 간단한 거치대만으로 전문적인 학습 관리 시스템을 구축할 수 있습니다. 언제 어디서나 학습 추적이 가능합니다.</p>
+                </div>
+                
+                <div class="advantage-card">
+                    <h4>🤖 AI 기반 개인 맞춤형 전략</h4>
+                    <p>학생별 학습 패턴, 성적 변화, 목표 대학을 종합 분석하여 1:1 맞춤형 학습 계획을 자동으로 생성합니다. 마치 개인 과외 선생님처럼 작동합니다.</p>
+                </div>
+                
+                <div class="advantage-card">
+                    <h4>📊 데이터 기반 합격 예측</h4>
+                    <p>전국 대학 입시 데이터베이스와 실시간 성적 분석을 통해 정확한 합격 가능성을 예측합니다. 목표 대학까지 남은 거리를 구체적으로 보여줍니다.</p>
+                </div>
+                
+                <div class="advantage-card">
+                    <h4>⏰ 실시간 학습 피드백</h4>
+                    <p>공부하는 순간순간 집중도, 효율성을 실시간으로 분석하여 즉각적인 피드백을 제공합니다. 비효율적인 학습 패턴을 즉시 개선할 수 있습니다.</p>
+                </div>
+                
+                <div class="advantage-card">
+                    <h4>💰 비용 대비 최고 효율</h4>
+                    <p>월 수백만원의 과외비 대신, 저렴한 비용으로 24시간 AI 튜터를 이용할 수 있습니다. 1,000등급 향상을 위한 투자 대비 효과가 가장 높습니다.</p>
+                </div>
+            </div>
+
+            <!-- 성과 통계 -->
+            <div class="service-stats">
+                <div class="stat-item">
+                    <div class="stat-number">87%</div>
+                    <div class="stat-desc">학습 효율 향상</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-number">1.2등급</div>
+                    <div class="stat-desc">평균 성적 향상</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-number">300일</div>
+                    <div class="stat-desc">평균 사용 기간</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-number">92%</div>
+                    <div class="stat-desc">사용자 만족도</div>
+                </div>
+            </div>
+
+            <!-- CTA 버튼 -->
+            <div style="text-align: center; margin-top: 30px;">
+                <button onclick="document.getElementById('section-tracker').scrollIntoView({behavior: 'smooth'})" style="font-size: 18px; padding: 15px 40px; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);">
+                    🚀 지금 바로 시작하기
+                </button>
+                <p style="margin-top: 15px; color: #666; font-size: 14px;">
+                    * 베타 서비스 기간 중 무료 이용 가능
+                </p>
+            </div>
+        </section>
 
         <!-- Section 1: 교과서 인식 -->
         <section id="section-tracker" class="section">
@@ -2074,6 +2464,12 @@
             setTimeout(() => {
                 updateEfficiencyChart();
                 calculateEfficiency();
+                
+                // 저장된 효율성 데이터 로드
+                const savedEffData = localStorage.getItem('efficiencyData');
+                if (savedEffData) {
+                    Object.assign(efficiencyData, JSON.parse(savedEffData));
+                }
             }, 500);
         };
         
